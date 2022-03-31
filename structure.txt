@@ -1,0 +1,184 @@
+1. Explore IBM Satellite
+
+1.1 Access IBM Cloud
+1.2 Access IBM Cloud Satellite
+1.3 Access Satellite Infrastructure collection
+1.4 Access hosts assigned to Lab Satellite Location 
+1.5 Access services for a Satellite location
+1.6 Access Link Endpoints
+1.7 Finish Step 1
+
+
+2. Enable access to an application at a location with Satellite Link Endpoints
+
+2.1 Access the drone controller
+2.2 Add and configure a new link endpoint
+2.3 View the newly created link endpoint and its address
+2.4 Finish Step 2
+
+
+3. Connect to another service with App Connect
+
+3.1 Explore the sensor database
+3.2 Set up App Connect flow
+3.3 Start the API
+3.4 Try out the flow
+3.5 Finish Step 3
+
+
+4. Explore Remote Operations Console with new flows
+
+4.1 Configure lab flow using Satellite Link endpoint
+4.2 Explore the lab flow drone viewer modal
+4.3 Finish Step 4
+
+
+
+<td class="step completed">
+<div class="title">Step 1 <b>Completed ✅</b></div><br />
+
+<td class="step next">
+<div class="title">Step 2 <b>Next</b></div><br />
+
+<td class="step inprogress">
+<div class="title">Step 1 <b>In Progress</b></div><br />
+
+☑ 
+
+<div class="timeline">
+    <table>
+        <tbody>
+            <tr>
+                <td class="step next">
+                    <div class="title">Step 1 <b>Next</b></div><br/>
+                    ☑ Access IBM Cloud<br/>
+                    ☑ Access IBM Cloud Satellite<br/>
+                    ☑ Access Satellite Infrastructure collection<br/>
+                    ☑ Access hosts assigned to Lab Satellite Location<br/>
+                    ☑ Access services for a Satellite location<br/>
+                    ☑ Access Link Endpoints
+                </td>
+                <td class="arrow">→</td>
+                <td class="step">
+                    <div class="title">Step 2</div><br/>
+                    ☑ Access the drone controller<br/>
+                    ☑ Add and configure a new link endpoint<br/>
+                    ☑ View the newly created link endpoint and its address<br/>
+                </td>
+                <td class="arrow">→</td>
+                <td class="step">
+                    <div class="title">Step 3</div><br/>
+                    ☑ Explore the sensor database<br/>
+                    ☑ Set up App Connect flow<br/>
+                    ☑ Start the API<br/>
+                    ☑ Try out the flow<br/>
+                </td>
+                <td class="arrow">→</td>
+                <td class="step">
+                    <div class="title">Step 4</div><br/>
+                    □ Configure lab flow using Satellite Link endpoint<br/>
+                    □ Explore the lab flow drone viewer modal<br/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="question">
+💡 ...? <span class="readmore">[Click to Read More]</span>
+</div>
+<div class="answer">
+...
+</div>
+
+
+
+<a href="link" target="_blank">text</a>
+
+
+<div class="step">text</div>
+
+
+<div class="standardImage">
+    <img src="./img/0.png">
+</div>
+
+
+<span class="labnameHere">YourLabName</span>
+
+<span class="sg_numberHere">unassigned</span>
+
+
+
+
+
+
+<table class="section_withImage">
+    <tbody>
+        <tr>
+            <td width="50%">
+                <img class="rightFloat" src="./img/1_6_2_A.png">
+            </td>
+            <td style="padding: 10px">
+                <p>
+                    Click on openshift-api-c7pisqgw0e96bqf631v0. 
+                    If it’s difficult to find in the long list, use the Search at the top of the list.
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+<div class="codeblock">
+    <div class="text-wrap">
+        public / <b>config.json</b><br />
+        <textarea id="textA" readonly>
+            {
+            "ConsoleDisplayName": "Remote Operations Console - Corrected Config",
+            "UserDrones": [
+            {
+            "friendly_name": "Lab User Drone1",
+            "drone_serial_no": "Lab1_0001"
+            },
+            {
+            "friendly_name": "Lab User Drone2",
+            "drone_serial_no": "Lab1_0002"
+            },
+            {
+            "friendly_name": "Lab User Drone3",
+            "drone_serial_no": "Lab1_0003"
+            }
+            ],
+            "DroneOperations": [
+            "Rescue Coordination",
+            "Damage Inspection",
+            "Safety Analysis",
+            "Stormwater Operations Monitor",
+            "Geothermal Monitor"
+            ]
+            }
+        </textarea>
+        <br />
+        <div id="copyToClipboard-a" class="clipboardButton">Copy to clipboard</div>
+        <div id="notif" class="notif"></div>
+    </div>
+</div>
+
+
+<div class="codeblock">
+    <div class="text-wrap">
+        Your route name<br>
+        <textarea class="routeNameHere" id="text-routename" readonly>drone-controller.YourLabName-2020-lab-2.svc.cluster.local</textarea>
+        <br>
+        <div id="copyToClipboard-routename" class="clipboardButton">Copy to clipboard</div>
+        <div id="notif-routename" class="notif"></div>
+    </div>
+</div>

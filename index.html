@@ -1,0 +1,2910 @@
+<!DOCTYPE html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>IEL Drone Lab 2 (Satellite) - Instructions</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans+Condensed:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&family=IBM+Plex+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <a id="top"></a>
+    <div id="navbar">
+        <span class="start" onClick="toggleOptions()">IEL Drone Lab 2 (Satellite)</span>
+        <span id="nb" class="item" onClick="moveTo('begin')" style="background-color: #0471DC;">Begin Lab</span>
+        <span id="np" class="item" onClick="moveTo('prelim')">Preliminary Steps</span>
+        <span id="n1" class="item" onClick="moveTo('s1')">Step 1</span>
+        <span id="n2" class="item" onClick="moveTo('s2')">Step 2</span>
+        <span id="n3" class="item" onClick="moveTo('s3')">Step 3</span>
+        <span id="n4" class="item" onClick="moveTo('s4')">Step 4</span>
+        <span id="ns" class="item" onClick="moveTo('sum')">Summary</span>
+        <div id="links_support">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><a class="link" href="https://slack.com/app_redirect?channel=C036UABE4M6" target="_blank"><span class="out itemlink"> <img src="./img/slack.png" />&nbsp;&nbsp;Lab Slack channel - post questions & more ⇒</span></a></td>
+                    </tr>
+                    <tr>
+                        <td><a class="link" href="mailto:gscgov@us.ibm.com?cc=edgingtn@us.ibm.com, sjchrist@us.ibm.com, mariados@us.ibm.com&subject=Requesting%20Support%20-%20IEL%20Drone%20Lab2%20(Satellite)&body=(Your%20message%20here)"><span class="out itemlink">Not an IBMer? Email gscgov@us.ibm.com for support</span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--<div id="optionsMenu"><span class="opt" id="highlightedUpdates2" onClick="updates2()">[Highlight 7/14/2020 Updates]</span> <span class="opt" id="highlightedUpdates" onClick="updates()">[6/30/2020]</span> <span id="keepTop" onClick="keepTop()">Keep at top</span></div>-->
+    <div id="full">
+        <!--- Begin Lab -->
+        <div id="beginlab" class="main" style="display:block;">
+            <div class="block">
+                <div class="leftHalf">
+                    <h1>IEL Drone Lab 2 (Satellite): Introduction</h1>
+                    <span class="userNote">&#9734 For this lab, a lab user name was created for you. This name was set to <span class="labnameHere">YourLabName</span>. This information will be addressed and referenced later in the lab.</span>
+
+                    <p>
+                        <b>Note</b>: The <b>IEL (Industry Engineering Lab)</b> in Dallas was formerly known as IBM Global Industry Solutions (<b>GIS</b>) and the Global Solution Center (<b>GSC</b>). You may encounter the GIS name or the GSC name if you revisit previous labs.
+                    </p>
+
+                    <p>
+                        <b>Welcome</b>! This lab is <b>part of</b> a series of labs designed to demonstrate how IBM cloud technology, such as Satellite, Hybrid Multicloud, and Cloud Pak for Integration can be utilized along with modern industry devices, such as drones and sensors, in various industry-specific applications. Please note that this lab is an alternative/update to the "GSC Drone Lab 2" which leveraged Secure Gateway and API Connect. 
+                    </p>
+
+                    <p>
+                        In previous labs, you deployed a customized, containerized application onto OpenShift. <span class="orange">If you have not completed the previous lab, please return to the TechZone catalog <a href="https://techzone.ibm.com/collection/dronelab1" target="_blank">https://techzone.ibm.com/collection/dronelab1</a>) and request access to Remote Drone Console Application Hands-on Lab #1.</span>
+                    </p>
+
+                    <p>
+                        If it has been a significant amount of time since you have completed the previous lab, it is <b>recommended</b> that you review the guide for Drone Lab 1, located here: <a href="https://pages.github.ibm.com/dallas-gsc-gov/dronelab" target="_blank">https://pages.github.ibm.com/dallas-gsc-gov/dronelab</a>. Additionally, feel free to use the Drone Lab 1 guide <b>anytime</b> for your reference.
+                    </p>
+
+                    <p>
+                        Please confirm below that you have completed the previous lab and are ready to start this lab.
+                    </p>
+
+                    <p id="lab1Confirm">
+                        <input type="checkbox" id="lab1Complete" onclick="lab1Completed()"> I have completed Drone Lab 1 and am ready to begin this lab, Drone Lab 2 (Satellite).</p>
+
+                    <p id="lab1Confirmation" style="display:none">Thank you for completing Drone Lab 1! You may continue on with this lab.</p>
+
+                    <p>The diagram on the right depicts a high-level flow and services used in this lab.</p>
+                </div>
+                <div class="rightHalf">
+                    <div class="tableofcontents">
+                        <span class="magenta">Table of Contents</span>
+                        <br/>
+                        <br/>
+                        Before you begin <br/>
+                        1. Explore IBM Satellite <br/>
+                        2. Enable access to an application at a location with Satellite Link Endpoints <br/>
+                        3. Connect to another service with App Connect <br/>
+                        4. Explore Remote Operations Console with new flows <br/>
+                        Summary & Contacts
+                    </div>
+                    <img class="sideImage" src="./img/prodflow.png" />
+                    <br/>
+                    <a href="./img/prodflow.png" target="_blank">View full size diagram</a>
+                </div>
+            </div>
+            <div class="block">
+                <h2> Lab Overview </h2>
+            </div>
+            <div class="block">
+                <div>
+                    <div class="leftHalf">
+                        <img src="./img/labOverview2.png" class="bigImage" />
+                    </div>
+                    <div class="rightHalf">
+                        <p>
+                            The purpose of this lab is to enable connection from the Remote Operations Console you customized and deployed in Lab 1, to an on-prem private cloud service provided by a fictional company, "IEL Drones-To-Go". You will use an <b>IBM Satellite Link</b> to allow the Remote Operations Console running on the IBM Public Cloud to access the drone controller service, which is located on a private satellite cluster (OpenShift Container Platform) cluster at the satellite location: the IEL (Industry Engineering Lab) in Coppell, TX.
+                        </p>
+
+                        <p>
+                            This lab also uses <b>App Connect</b> to integrate a drone controller service without worrying about its data formats in order to transform data. It does this through intelligent mapping functions and converts the drone’s proprietary data to be destination-specific in transit, making it ready for alignment in the destination Remote Operations Console application.
+                        </p>
+
+                        <table class="impTable">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Keep in mind that there are many business and technical benefits to Satellite and its underlying capabilities, but that this lab will focus on the enablement of <span class="magenta">Satellite Link endpoints</span> to facilitate the required functionality of the Remote Drone Console application and use case.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="block">
+
+                <h2>Lab Environment Setup</h2>
+
+                <p>
+                    When you made a request to take this hands-on lab, there were some background tasks that were performed on your behalf to prepare the lab environment, which are described below. Don't worry if you have some questions about these concepts... you will get a lot more explanation and hands-on experience as you move through lab steps.
+                </p>
+
+                <div class="twoBigImagesArea">
+                    <a href="./img/prodflow.png" target="_blank"><img src="./img/prodflow.png" /></a>
+                    <a href="./img/labflow.png" target="_blank"><img src="./img/labflow.png" /></a>
+                </div>
+
+                <i>Click on a flow above to view its full size.</i>
+
+                <p>
+                    <span class="blue">Created Two Lab Environment Flows </span><br/>
+
+                    As depicted above, a <b>production flow</b> describes how sensor data flows from IEL Drones-To-Go (left hand side for both diagrams) to the visual command center where a Situational Awareness Operator (right hand side for both diagrams) gain situational awareness and asses the situation. The production flow was created to support new functionality that illustrates Hybrid Cloud integration between the Remote Drone Console application at the IBM Public Cloud and drone controller application at the satellite location running on the IEL private cloud. <br/><br/>
+                    
+                    An <b>additional lab flow</b> was created to facilitate the hands-on activities with IBM’s most common integration services in a Hybrid Multicloud context, which each user will encounter in steps 1-3.<br/><br/>
+                    
+                    The lab users will have the option to execute the <b>production</b> flow in <b>Step 4</b>.
+                </p>
+
+                <p>
+                    <span class="blue">Created Drone Controller services in IEL Private Cloud </span><br/>
+                    
+                    The <b>drone controller application</b> is an integral part of this lab – it interacts with physical and virtual resources at the IEL and its private cloud, along with providing API endpoints that can orchestrate the appropriate functionality. This application, along with a drone activity database, was deployed within a Satellite OpenShift cluster on an on-prem satellite location at IEL private cloud, which is used for the lab’s production flow. 
+                </p>
+
+                <p>
+                    <span class="blue">Created Drone Controller services in IBM Public Cloud  </span><br/>
+                    
+                    The <b>drone controller application</b>, along with a drone activity database, was deployed within a Satellite OpenShift cluster on a satellite location at IBM cloud, which is used for the lab flow.
+                </p>
+
+                <p>
+                    <span class="blue">Provisioned a classic OpenShift cluster in the IBM Cloud environment </span><br/>
+
+                    A classic IBM Cloud organization OCP cluster is where the Remote Drone Console application will be deployed and acts as the public cloud.
+                </p>
+
+                <p>
+                    <span class="blue">Provisioned a satellite OpenShift cluster @ Satellite location in the IBM Cloud environment </span><br/>
+
+                    A satellite OCP cluster that will be in focus in steps 1-2 of this lab acts as a simulated private cloud. This additional satellite cluster was created in the IBM Cloud environment to enable each lab user to have visibility into the Satellite location’s hosts, services, link endpoints, application artifacts and configurations that were deployed so that they can perform hands-on activities. In this cluster is where the lab flow’s drone controller application is installed and used for lab activities.
+                </p>
+
+                <p>
+                    <span class="blue">Provisioned Cloud services </span><br/>
+
+                    Several IBM Cloud services were prepared and provisioned for lab users within the IBM Cloud organization, including App Connect and IBM Cloudant.
+                </p>
+
+                <p>
+                    <span class="blue">Deployed a project and artifacts for each lab user in the IBM Cloud </span><br/>
+
+                    A project with simplified Remote Drone Console applications (one for production and other for the lab) was deployed for each lab user within the classic OpenShift cluster on IBM Cloud. In addition, YAML files were provided to allow each user to walk through the setup of App Connect services.
+                </p>
+
+            </div>
+            <div class="nextStepBar" onClick="moveTo('prelim')">
+                Move on to the Preliminary Steps →
+            </div>
+        </div>
+        
+        <!--- Preliminary Steps -->
+        <div id="prelim" class="main">
+            <div class="block">
+                <div class="leftHalf">
+                    <div class="slackInfo">
+                        <h2>
+                            <a name="slack">Slack Communication</a>
+                        </h2>
+
+                        <p>
+                            Communication (such as feedback, questions, comments, and help) <b>for IBMers</b> is done through a Slack channel dedicated to this lab. Before you begin the lab, it is encouraged that you confirm you have access to the channel <span class="purple">#iel-gov-dronelab-satellite</span>.
+                        </p>
+                        <p>
+                            Go to
+                            <span class="blue">
+                                <a href="https://slack.com/app_redirect?channel=C036UABE4M6" target="_blank">
+                                    https://slack.com/app_redirect?channel=C036UABE4M6
+                                </a>
+                            </span>
+                            or 
+                            <span class="blue">
+                                <a href="https://my.slack.com/messages/C036UABE4M6" target="_blank">
+                                    https://my.slack.com/messages/C036UABE4M6
+                                </a>
+                            </span>
+                            to verify you have access to this channel. Additionally, you can use the <span class="magenta">link in the top right corner of this page</span> to open the channel in your Slack client.
+                        </p>
+                        <p>
+                            If you are not an IBMer, email <b>gscgov@us.ibm.com</b> for any support you may need.
+                        </p>
+                    </div>
+                </div>
+                <div class="qHalf">
+                    <div class="question">
+                        👈 When I click that link, I do not see a Slack channel.
+                        <span class="readmore">[Click to Read Solution]</span>
+                    </div>
+                    <div class="answer">
+                        If you are an IBMer, you will encounter issues if you do not have access to the
+                        <b>IBM Slack organization</b>. <br/><br/>
+
+                        You may need to set up Slack first in order to gain access to this channel. Go to <a href="https://w3.ibm.com/w3publisher/slack-at-ibm/getting-started" target="_blank">https://w3.ibm.com/w3publisher/slack-at-ibm/getting-started</a> for more help.<br/><br/>
+
+                        If you have further issues, please send an email to gscgov@us.ibm.com.
+                    </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <h2> Preliminary Steps </h2>
+                <div class="leftHalf">
+                    <div class="goldInfo">
+                        You will open <b>several tabs</b> throughout the course of this lab. To avoid confusion, it is recommended that this instruction site is viewed via a browser <b>window with no other tabs open</b> before you begin.
+                    </div>
+
+                    <p>
+                        It is strongly recommended you use <b>Google Chrome</b> or <b>Mozilla Firefox</b> as your browser for this lab. Browsers such as Safari have been known to encounter errors with some of the IBM Cloud services.
+                    </p>
+
+                    <p>
+                        The screenshots shown in this lab were recorded in a full screen width/height browser. Some IBM Cloud services <b>perform best in full screen resolution</b>.
+                    </p>
+
+                    <p>
+                        To avoid issues as you navigate through the lab steps, it is ideal to use the buttons and tabs within the instructions (as opposed to using your browser's "back" and "forward" options).
+                    </p>
+
+                    <p>
+                        <b>After you requested this lab, you should have received an email containing the link to this instructions page.</b>
+                    </p>
+
+                    <p>
+                        <b>Note</b>:
+                        <span class="inote">
+                            If you start this lab without being assigned a lab name, you may encounter errors and be unable to complete this lab successfully. Additionally, completing Drone Lab 1 prior to starting this lab is recommended as it contains foundational knowledge related to this lab's content.
+                        </span>
+                    </p>
+
+                    <p>
+                        <span class="green">The instructions here will guide you through the lab step by step.</span>
+                    </p>
+                </div>
+
+                <div class="rightHalf">
+                    <p>This instructions page that you have been provided should contain your lab name.</p>
+
+                    <div class="impInfo">
+                        <p><b>Your Lab Name</b>: <span class="labnameHere">YourLabName</span></p>
+                    </div><br/>
+                    <div class="subImpInfo">
+                        Referencing the above, if your Lab Name is <b>"YourLabName"</b>, please use the <b>Slack channel</b> link located in the <b>top right corner</b> of this page and post <b>"I was not assigned a lab name for Drone Lab 2 (Satellite)."</b>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="timeline">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="step next">
+                                <div class="title">Step 1 <b>Next</b></div><br/>
+                                □ Access IBM Cloud<br/>
+                                □ Access IBM Cloud Satellite<br/>
+                                □ Access Satellite Infrastructure collection<br/>
+                                □ Access hosts assigned to Lab Satellite Location<br/>
+                                □ Access services for a Satellite location<br/>
+                                □ Access Link Endpoints
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step">
+                                <div class="title">Step 2</div><br/>
+                                □ Access the drone controller<br/>
+                                □ Add and configure a new link endpoint<br/>
+                                □ View the newly created link endpoint and its address<br/>
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step">
+                                <div class="title">Step 3</div><br/>
+                                □ Explore the sensor database<br/>
+                                □ Set up App Connect flow<br/>
+                                □ Start the API<br/>
+                                □ Try out the flow<br/>
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step">
+                                <div class="title">Step 4</div><br/>
+                                □ Configure lab flow using Satellite Link endpoint<br/>
+                                □ Explore the lab flow drone viewer modal<br/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+
+            <div class="nextStepBar" onClick="moveTo('s1')">
+                Ready? Move on to Step 1 and start the lab →
+            </div>
+
+        </div>
+        
+        <!--- Begin Step 1 -->
+        <div id="step1" class="main">
+            <div id="menu">
+                <a href="#step1" class="start">Step 1</a>
+                <a href="#1_1">1.1 Access IBM Cloud</a>
+                <a href="#1_2">1.2 Access IBM Cloud Satellite</a>
+                <a href="#1_3">1.3 Access Satellite Infrastructure collection</a>
+                <a href="#1_4">1.4 Access hosts assigned to Lab Satellite Location </a>
+                <a href="#1_5">1.5 Access services for a Satellite location</a>
+                <a href="#1_6">1.6 Access Link Endpoints</a>
+                <a href="#finishStep1" class="end">Finish Step 1</a>
+            </div>
+            <div id="content">
+                <div id="main">
+
+                    <div id="sec_step1">
+                        <h1>
+                            <a name="step1">1. Explore IBM Satellite</a>
+                        </h1>
+                        
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <p>
+                                            In this step, the first few instructions may seem familiar – you should be comfortable with navigating IBM Cloud based on your completion of the first drone lab. As a reminder, you can always reference the first lab’s instructions guide here <a href="https://pages.github.ibm.com/dallas-gsc-gov/dronelab" target="_blank">https://pages.github.ibm.com/dallas-gsc-gov/dronelab</a>.
+                                        </p>
+                    
+                                        <p>
+                                            In this lab, you will focus on <span class="blue">IBM Cloud Satellite</span> and its creation of distributed cloud regions anywhere you have infrastructure, <i>e.g.</i>, factories, edge environments, on-prem locations, and even your home!
+                                        </p>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <img src="./img/1_overview_A.png" width="100%">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            The purpose of this setup was to demonstrate the Satellite technology in order to:<br/>
+                            <ul>
+                                <li>Build, deliver, and manage your applications across a hybrid multi-cloud environment.</li>
+                                <li>Bring the best of cloud wherever it is needed to run, while maintaining the simple "as a service" experience.</li>
+                                <li>Use a common control plane to manage your apps, platform, and security across our multi-cloud platform.</li>
+                            </ul>
+                        </p>
+
+                        <p>
+                            Let’s take a moment to review some concepts that you will be delving into in the next few steps. Consider two parties involved:<br/>
+                            <ol>
+                                <li>Public Safety Situational Awareness Operators that use the Remote Drone Operations Console application, and,</li>
+                                <li>An organization, "IEL Drones-To-Go", which has private on-prem resource in Coppell, TX that allows piloting and observing of local drones.</li>
+                            </ol>
+                        </p>
+
+                        <p>
+                            IEL Drones-To-Go wants users like Public Safety Situational Awareness Operators to access their drone service, easily manage their access, make sure this connection is done securely so they are not compromised in any way.
+                        </p>
+
+                        <p>
+                            The Public Safety Situational Awareness Operators, owners, and users of the Remote Drone Operations Console want to connect the service that IEL Drones-To-Go provides.
+                        </p>
+
+                        <img src="./img/1_overview_B.png" class="standardImage" />
+
+                        <p>
+                            You will explore how IBM Satellite Link endpoints can help <b>enable the connection</b> between the Public Safety Situational Awareness Operators in one cloud environment, and the IEL Drones-To-Go services that are running in another cloud environment. 
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="15%" style="text-align: center">
+                                        <img src="./img/location.png" width="100%">
+                                    </td>
+                                    <td style="padding:10px">
+                                        <p>
+                                            Satellite extends IBM Cloud with the new concept of a "location." <span class="blue">Locations</span> refer to any infrastructure where you can run services and applications. Once a location is created, you can start using that location to run IBM Cloud services, such as Red Hat OpenShift on IBM Cloud, IBM Cloud Databases, Continuous Delivery pipelines, AI and more.
+                                        </p>
+                                        <p>
+                                            With <span class="blue">Satellite Link endpoints</span>, you can allow <b>any client</b> that runs in your Satellite location to connect to a service, server, or app that runs <b>outside of the location</b>, or allow a client running on an IBM Cloud private network to connect to a service, server, or app that runs <b>in your location</b>.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="centerImgMed">
+                            <img src="./img/1_overview_C.png" class="centerImgMed" />
+                        </div>
+
+                        <p>
+                            IBM Cloud Satellite acts as a "Hybrid Cloud Mesh" that creates <b>distributed cloud regions</b> anywhere you have <b>infrastructure</b>. Through this hybrid mesh, you can manage each location from a common control plane. IBM Cloud Satellite does this by attaching <b>remote infrastructure</b> in a remote location to your Cloud Satellite <b>control plane</b>. This location can then be used by IBM Cloud services as <b>deployment targets</b>.
+                        </p>
+
+                        <p>
+                            In this next step of the lab, you will learn about how to use Satellite Link Endpoints to <b>bridge a connection</b> between the <span class="blue">Remote Drone Operations Console</span> and the <span class="blue">on-prem resource</span> at IEL Drones-To-Go. In later steps, you will continue to get more access to the IEL Drones-To-Go service, including accessing APIs and even invoking related flows.
+                        </p>
+
+
+
+                        <p>Reference:</p>
+                        <div class="whole">
+                            <div class="ref instructionRect">
+                                <div class="in">
+                                    <span class="title">Instruction/Step</span>
+                                    <br/>
+                                    <span class="UPDATE">Indicated as</span> text with light blue background.
+                                    <br/>
+                                    <br/>
+                                    <i>Example:</i>
+                                    <br/>
+                                    <div class="step">Scroll down after you make your changes</div>
+                                </div>
+                            </div>
+                            <div class="ref reminderRect">
+                                <div class="in UPDATE">
+                                    <span class="remindertitle">Reminder</span>
+                                    <br/>
+                                    It's important to read each step carefully and in order. <br/> <br/>
+                                    Skipping sections, reading too fast, or not clicking to read <br/>
+                                    <div class="ex_question">💡 <b>More Information</b> lightbulb blocks</div>
+                                    <br/> may result in incomplete learning.
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="whole">
+                            <div class="rect blueRect">
+                                <div class="in">
+                                    Technologies Used
+                                    <br/>
+                                    <img src="./img/cloud.png" /><br/>
+                                    <img src="./img/openshift.png" /><br/>
+                                    <img src="./img/satellite_logo.png" />
+                                </div>
+                            </div>
+
+                            <div class="rect magentaRect">
+                                <div class="in">
+                                    Your Tasks for Step 1 <br/><br/>
+                                    <div class="list">
+                                        □ Access IBM Cloud<br/>
+                                        □ Access IBM Cloud Satellite<br/>
+                                        □ Access Satellite Infrastructure collection<br/>
+                                        □ Access hosts assigned to Lab Satellite Location<br/>
+                                        □ Access services for a Satellite location<br/>
+                                        □ Access Link Endpoints
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step inprogress">
+                                            <div class="title">Step 1 <b>In Progress</b></div><br/>
+                                            □ Access IBM Cloud<br/>
+                                            □ Access IBM Cloud Satellite<br/>
+                                            □ Access Satellite Infrastructure collection<br/>
+                                            □ Access hosts assigned to Lab Satellite Location<br/>
+                                            □ Access services for a Satellite location<br/>
+                                            □ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 2</div><br/>
+                                            □ Access the drone controller<br/>
+                                            □ Add and configure a new link endpoint<br/>
+                                            □ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 3</div><br/>
+                                            □ Explore the sensor database<br/>
+                                            □ Set up App Connect flow<br/>
+                                            □ Start the API<br/>
+                                            □ Try out the flow<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 4</div><br/>
+                                            □ Configure lab flow using Satellite Link endpoint<br/>
+                                            □ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <!-- 1.1 -->
+                    <div id="sec_1_1">
+                        <h2>
+                            <a name="1_1">1.1 Access IBM Cloud</a>
+                        </h2>
+
+                        <div class="sectionTitle">1.1.1</div>
+                        <p>
+                            You’ll need to access the IBM Satellite Location within the IBM Cloud to configure your application’s endpoint. Begin by signing into IBM Cloud. (New Tab ⇒ <a href="https://cloud.ibm.com" target="_blank">https://cloud.ibm.com</a>)
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Once you’ve logged in with your credentials, you should be greeted with a dashboard that displays the various resources that IBM Cloud has to offer. From Cognitive APIs to DevOps to Classic Infrastructure resources, IBM Cloud has many offerings to explore.
+                                        </p>
+
+                                        <p>
+                                            At the top of the dashboard, you’ll see a navigation bar. On the right side of the navigation bar, there is a dropdown for various accounts you may be a part of. Most likely, the default is the last account you opened, if not the only one available.
+                                        </p>
+
+                                        <p>For this lab, you’ll be working in the <b>1500867 – ITZ – SBAAS Primary</b> account. </p>
+
+                                        <div class="step">
+                                            Click on <b>1500867 – ITZ – SBAAS Primary</b> in the IBM Cloud’s navigation bar dropdown.
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img class="rightFloat" src="./img/1_1_1.png">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="problem question">
+                            ⚠️ I do not see the 1500867 – ITZ – SBAAS Primary account in the dropdown! <span class="readmore">[Click for help]</span>
+                        </div>
+                        <div class="answer">
+                            Lab users are provided access to the 1500867 – ITZ – SBAAS Primary account during the provisioning process. Your access may not have been updated, or an error occurred. If this is the case, please submit the message "<b>I do not see the 1500867 – ITZ – SBAAS Primary account in the dropdown</b>" in the #iel-gov-dronelab-satellite slack channel with an entire screen screenshot of the dropdown.
+                        </div>
+
+                    </div>
+
+                    <!-- 1.2 -->
+                    <div id="sec_1_2">
+                        <h2>
+                            <a name="1_2">1.2 Access IBM Cloud Satellite </a>
+                        </h2>
+                        <div class="sectionTitle">1.2.1</div>
+                        
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Once you click on 1500867 – ITZ – SBAAS Primary, your dashboard will update with <b>Resources</b> that are specific to it. You should see a <b>Resource summary card</b>.
+                                        </p>
+                                        <div class="step">Click on <b>View all</b> in the <b>Resource summary</b> card.</div>
+                                        <p>
+                                            You should now see a <b>list of resources</b> that you have access to, within the 1500867 – ITZ – SBAAS Primary account. 
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <img class="rightFloat" src="./img/1_2_1.png">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="sectionTitle">1.2.2</div>
+
+                        <div class="step">Click on the <b>Satellite</b> grouping. </div>
+                        
+                        <p>
+                            Take a look at the resources under the <b>Satellite</b> grouping. You will explore the govlab-satellite-location resource later in Step 1.4.2.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_2_2.png">
+                        </div>
+
+                        <div class="problem question">
+                            ⚠️ I do not see anything under Satellite! <span class="readmore">[Click for help]</span>
+                        </div>
+                        <div class="answer">
+                            Lab users have privileges added during the provisioning process. Your privileges may not have been updated, or an error occurred. If this is the case, please submit the message "<b>I do not see anything under Satellite</b>" in the #iel-gov-dronelab-satellite slack channel with an entire screen screenshot of your Resource List.
+                        </div>
+
+
+                        <div class="sectionTitle">1.2.3</div>
+
+                        <div class="step">Click on the <b>Devices</b> grouping. </div>
+
+                        <p>
+                            Take a look at the resources under the <b>Devices</b> grouping. You will explore the resources in Devices in Step 1.3.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_2_3.png">
+                        </div>
+
+                        <div class="problem question">
+                            ⚠️ I do not see anything under Devices! <span class="readmore">[Click for help]</span>
+                        </div>
+                        <div class="answer">
+                            Lab users have privileges added during the provisioning process. Your privileges may not have been updated, or an error occurred. If this is the case, please submit the message "<b>I do not see anything under Devices</b>" in the #iel-gov-dronelab-satellite slack channel with an entire screen screenshot of your Resource List.
+                        </div>
+
+                    </div>
+
+                    <!-- 1.3 -->
+                    <div id="sec_1_3">
+                        <h2>
+                            <a name="1_3">1.3 Access Satellite Infrastructure collection</a>
+                        </h2>
+                        
+                        <div class="sectionTitle">1.3.1</div>
+
+                        <p>
+                            Remember that a <span class="blue">location</span> is a representation of an environment in your infrastructure provider, such as an on-prem data center or public cloud, that you want to bring IBM Cloud services to so that you can run workloads in your own environment. You create the location by attaching <b>host machines</b> <span class="blue">from your infrastructure</span>. In the context of a Satellite location, you can think of host machines as your own VMs, Bare Metal, or privately managed Iaas from your infrastructure. These host machines provide the computing power for running IBM cloud services in the Satellite location - for example, acting as the worker nodes in a RedHat OpenShift cluster. 
+                        </p>
+
+                        <p>
+                            To set up a Satellite location, you must first (1) create the location, (2) attach hosts to it, and then (3) create the location control plane.
+                        </p>
+
+                        <p>
+                            The <span class="blue">location control plane</span> runs resources that are managed by Satellite to help manage the hosts, clusters, and other resources that you attach to the location.
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="15%">
+                                        <img style="width:100%" src="./img/1_3_1.png">
+                                    </td>
+                                    <td style="padding:10px">
+                                        <p>
+                                            Some important <span class="magenta"><b>takeaways</b></span> regarding Satellite Locations include:<br/>
+                                            <ul>
+                                                <li>The end user or business entity controls the collection of infrastructure and services outside of an IBM Cloud data center</li>
+                                                <li>IBM Cloud is the target for IBM Cloud services</li>
+                                                <li>The end user or business entity manages <b>hosts</b> within a location</li>
+                                                <li>Hosts are automatically assigned for IBM Cloud Services</li>
+                                                <li>An entire location’s capacity is managed by adding or removing hosts</li>
+                                            </ul>
+                                        </p>
+                                        <p>You will access this lab’s Location to better understand your location’s infrastructure collection.</p>
+                                        <p>For your convenience, we have created an <span class="blue">infrastructure collection</span> on IBM Cloud, but in most cases, it will be at your data center or your own cloud (Azure, Google Cloud, AWS, etc.). This infrastructure collection consists of virtual servers (running RHEL7 operating system) that are assigned to run on a Satellite control plane and have workloads for the OpenShift cluster service that was provisioned for this lab.</p>
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="sectionTitle">1.3.2</div>
+
+                        <p>
+                            Let’s begin by taking a look at first device – <b>control1.govlab.ibmsbaasonibm.com</b>.
+                        </p>
+
+                        <div class="step">Click on the device <b>control1.govlab.ibmsbaasonibm.com</b> to view details about this device.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/1_3_2_A.png">
+                        </div>
+
+                        <p>
+                            Once you click on this device, you will be able to see its status and details. (You may need to click "View full details" to see all of its information.)
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_3_2_B.png">
+                        </div>
+
+                    </div>
+
+                    <!-- 1.4 -->
+                    <div id="sec_1_4">
+                        <h2>
+                            <a name="1_4">1.4 Access hosts assigned to Lab Satellite Location </a>
+                        </h2>
+                        
+                        <div class="sectionTitle">1.4.1</div>
+
+                        <div class="standardImage">
+                            <img src="./img/1_4_1_A.png">
+                        </div>
+
+                        <p>
+                            The hosts at a location are <b>securely attached</b> and connected to IBM Cloud using <span class="blue">Link</span>:<br/>
+                            <ul>
+                                <li>Each location has a <b>local control plane</b> where Cloud Satellite manages all provisioned services and communicates back to the central Cloud Satellite control plane.</li>
+                                <li>At least three hosts are required for a minimal control plane (six are recommended).</li>
+                                <li>Additional hosts are required for each provisioned service.</li>
+                                <li>Hosts are assigned to a location as either control plane or worker nodes for a service.</li>
+                            </ul>
+                        </p>
+
+                        <p>
+                            A satellite environment requires <b>at least</b> three hosts (recommended six) for a minimal control plane and additional hosts are required for each provisioned service. For our lab satellite environment, we have provisioned a satellite OpenShift cluster service to deploy the drone controller application. And so we have assigned three hosts to the control plane and another three hosts as worker nodes for OpenShift satellite cluster service. As with any other managed cluster, you need to plan for scaling the cluster and design it for resiliency, so at any point of time you can "attach host" and enable the Cloud Satellite control plane to provision more worker nodes as needed.
+                        </p>
+
+                        <p>
+                            Let’s go back to see the Satellite grouping on the Resource List. You can do this by clicking the ≡ icon in the top left corner and then click "Resource List". 
+                        </p>
+
+                        <div class="step">Click the ≡ icon in the <b>top left corner</b> and then click "<b>Resource List</b>".</div>
+
+                        <div class="standardImage">
+                            <img src="./img/1_4_1_B.gif">
+                        </div>
+
+
+
+                        <div class="sectionTitle">1.4.2</div>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <img class="rightFloat" src="./img/1_4_2.png">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            In the Resource list, you will once again see the resources in the Satellite grouping. Let’s explore the <b>govlab-satellite-location</b> resource you saw earlier.
+
+                                            <div class="step">Click the <b>govlab-satellite-location</b> resource in the Satellite grouping.</div>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <div class="sectionTitle">1.4.3</div>
+
+                        <p>
+                            You should now see the govlab-satellite-location’s Getting started page. Let’s take a look at the <b>hosts</b> at this location.
+                        </p>
+
+                        <div class="step">Click on <b>Hosts</b> on the left side.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/1_4_3_A.png">
+                        </div>
+
+                        <p>
+                            Look at each host listed, along with its <b>name, status, availability, labels, cluster, worker pool, zone, and IP address</b>. You will notice that control1, control2, and control3 hosts belong to the Control plane cluster, and worker1, worker2, and worker3 hosts belong to the govlab-satellite-satcloudcluster. The numbers at the end of each host name correspond to the zones as well (zone-1, zone-2, and zone-3). 
+                        </p>
+
+                        <p>
+                            <span class="blue">Zone</span> is a deployment area for compute resources such as virtual machines or bare metals. A Satellite location must have at least three zones that are physically separate so that you can spread out hosts evenly across the zones to increase high availability (High availability is a core discipline in an IT infrastructure to keep your apps up and running, even after a partial or full site failure). For example, your cloud provider might have three different zones within the same region (Dallas, Washington, etc) , or you might use three racks with three separate networking and power supply systems in an on-prem environment.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_4_3_B.png">
+                        </div>
+
+                        
+                    </div>
+
+                    <!-- 1.5 -->
+                    <div id="sec_1_5">
+                        <h2>
+                            <a name="1_5">1.5 Access services for a Satellite location</a>
+                        </h2>
+                        
+                        <div class="sectionTitle">1.5.1</div>
+
+                        <div class="standardImage">
+                            <img src="./img/1_5_1_A.gif">
+                        </div>
+
+                        <p>
+                            The benefit of IBM Satellite is to bring <span class="blue">cloud services</span> to <b>any location</b> you need the service to run. As mentioned earlier, since IBM Cloud Satellite is like a hybrid cloud mesh, it presents all Cloud Satellite locations as just another <b>deployment target</b> for IBM Cloud services. In order to provision a service, it takes three easy steps:<br/>
+                            <ol>
+                                <li>Select satellite enabled services from IBM cloud catalog</li>
+                                <li>Select the satellite location</li>
+                                <li>Create the service! </li>
+                            </ol>
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img class="rightFloat" src="./img/1_5_1_B.png">
+                                    </td>
+                                    <td width="50%">
+                                        <p>
+                                            <div class="step">Click on <b>Services</b> on the left side.</div>           
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>These are the services at this location.</p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_5_1_C.png">
+                        </div>
+
+                        <p>
+                            In our lab satellite environment, you can see that <b>two services</b> have already been provisioned: one is the <span class="blue">control plane</span> to manage that location, and the other is the <span class="blue">OpenShift cluster</span> to deploy lab drone controller application.
+                        </p>
+
+
+                        <div class="sectionTitle">1.5.2</div>
+
+                        <p>
+                            Let’s take a quick look at some other <b>Satellite-enabled services</b> that are <b>available</b> today in the IBM Cloud Service Catalog. 
+                        </p>
+
+                        <div class="step">Click on <b>Catalog</b> in the top navigation bar.</div>        
+                        
+                        <div class="standardImage">
+                            <img src="./img/1_5_2_A.png">
+                        </div>
+
+                        <p>
+                            There are a lot of offerings on the IBM Cloud catalog, so let’s filter them so only the Satellite-enabled are shown.
+                        </p>
+
+                        <div class="step"><b>Scroll down</b> the catalog until you "<b>Works with</b>" grouping on the left side.</div>
+                        <div class="step">Select the "<b>Satellite Enabled</b>" option.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/1_5_2_B.gif">
+                        </div>
+
+                        <p>Let’s briefly explore a Satellite-enabled service - for example, <b>Databases for PostgreSQL</b>.</p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="70%">
+                                        <img class="rightFloat" src="./img/1_5_2_C.png">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <div class="step">Click on the tile for <br/><b>Databases for PostgreSQL</b>.</div>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            There are <b>three</b> main options for this Satellite-enabled service to pay attention to:
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_5_2_D.png">
+                        </div>
+
+                        <p>
+                            1. <span class="blue">Platform</span>:  Satellite is an option.<br/><br/>
+                            
+                            2. <span class="blue">Resource Group</span>: Even though you may be provisioning this service into a <b>remote location</b>, you can still <b>centrally control access</b> with IBM Identity and Access Management. This way all your resource groups, access groups, and individual access policies can be applied quite simply.<br/><br/>
+                            
+                            3. <span class="blue">Location</span>: Drop-down list of Cloud Satellite locations.<br/><br/>
+
+                        </p>
+
+
+
+                    </div>
+
+                    <!-- 1.6 -->
+                    <div id="sec_1_6">
+                        <h2>
+                            <a name="1_6">1.6 Access Link Endpoints</a>
+                        </h2>
+
+                        <div class="sectionTitle">1.6.1</div>
+                        
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <img class="rightFloat" src="./img/1_6_1_A.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <p>
+                                            <span class="blue">Link Endpoints</span> provide secure connection between Locations and IBM Cloud. The link provides the following:<br/><br/>
+                                            
+                                            <b>Control</b> - Allows control of traffic flow across the Link including SRE traffic.<br/>
+                                            <b>Transparency</b> – Provides traffic-level transparency across the Link and access reporting.<br/>
+                                            <b>Audit</b> – Provides service registration and policy-management of traffic-flow.<br/><br/>
+                                            
+                                            Let’s examine a <span class="blue">sample system Link endpoint</span> that was created as part of the satellite cluster creation. To do that, we’ll need to navigate back to the govlab-satellite-location first.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="step">
+                            1. Click on the <b>≡ icon</b> in the top left corner and then click "<b>Resource list</b>".<br/>
+                            2. Under the Satellite grouping, click "<b>govlab-satellite-location</b>". <br/>
+                            3. Then, click "<b>Link endpoints</b>" on the left side.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/1_6_1_B.png">
+                        </div>
+
+                        <p>
+                            You should now see the <b>Link endpoints</b> page for govlab-satellite-location.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_6_1_C.png">
+                        </div>
+
+
+                        <div class="sectionTitle">1.6.2</div>
+
+                        <p>
+                            At the bottom of this page, you will see a <b>full list</b> of endpoints. Bear in mind that you may see other lab users’ endpoints as well. 
+                        </p>
+
+                        <p>
+                            In step 2 of the lab, you will be <b>configuring an endpoint</b> for your drone controller application, but for now, let’s look at a <span class="blue">sample endpoint configuration</span> for OpenShift API service deployed in this location.
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="70%">
+                                        <img class="rightFloat" src="./img/1_6_2_A.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <div class="step">
+                                            Click on <b>openshift-api-c7pisqgw0e96bqf631v0</b>. <br/><br/>
+                                            If it’s difficult to find in the long list, use the <b>Search</b> at the top of the list.
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            Notice the following <b>four areas</b> in this sample endpoint:
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/1_6_2_B.png">
+                        </div>
+
+                        <p>
+                            1. <span class="blue">Destination FQDN or IP</span>: Address where the OpenShift cluster API service is listening for requests<br/><br/>
+                            2. <span class="blue">Destination port</span>: Port where the OpenShift API service is listening<br/><br/>
+                            3. <span class="blue">Endpoint address</span>: Address exposed to other services on IBM Cloud<br/><br/>
+                            4. <span class="blue">Source list</span>: ACL (access control list)
+                        </p>
+
+                        <p>
+                            <b>Note</b>: The Link Endpoint <span class="blue">Source list</span> limits access to endpoints and controls which clients can access destination resources (at a Satellite location or IBM Cloud) through an endpoint. If no sources are configured, any client can use an endpoint to connect to the destination resource. All of our lab satellite endpoints are not configured with source list for ease of use. Any application can access the satellite location resources from the IBM Cloud or access the IBM Cloud resources from the Satellite location without any restrictions.
+                        </p>
+
+                    </div>
+
+                    <!-- Finish Step 1 -->
+                    <div id="sec_finishStep1">
+                        <h2>
+                            <a name="finishStep1">Finish Step 1</a>
+                        </h2>
+                        <div class="sectionTitle">You completed Step 1! 🎉</div>
+                        <p>
+                            You have explored Satellite and its key features and gained a better understanding of how it works. You accessed and learned more about some of the key concepts on Satellite - like location, hosts, services, and endpoints.
+                        </p>
+                        <div class="rect magentaRect single">
+                            <div class="in">
+                                Step 1 <b>Completed</b><br/><br/>
+                                <div class="list">
+                                    ✅ Access IBM Cloud<br/>
+                                    ✅ Access IBM Cloud Satellite<br/>
+                                    ✅ Access Satellite Infrastructure collection<br/>
+                                    ✅ Access hosts assigned to Lab Satellite Location<br/>
+                                    ✅ Access services for a Satellite location<br/>
+                                    ✅ Access Link Endpoints
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            In the next step, you will learn how to enable a drone controller application running on a satellite location at a end user or business entity's cloud to accept requests from IBM Cloud.
+                        </p>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step completed">
+                                            <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                            ✅ Access IBM Cloud<br/>
+                                            ✅ Access IBM Cloud Satellite<br/>
+                                            ✅ Access Satellite Infrastructure collection<br/>
+                                            ✅ Access hosts assigned to Lab Satellite Location<br/>
+                                            ✅ Access services for a Satellite location<br/>
+                                            ✅ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step next">
+                                            <div class="title">Step 2 <b>Next</b></div><br/>
+                                            □ Access the drone controller<br/>
+                                            □ Add and configure a new link endpoint<br/>
+                                            □ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 3</div><br/>
+                                            □ Explore the sensor database<br/>
+                                            □ Set up App Connect flow<br/>
+                                            □ Start the API<br/>
+                                            □ Try out the flow<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 4</div><br/>
+                                            □ Configure lab flow using Satellite Link endpoint<br/>
+                                            □ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="nextStepBar" onClick="moveTo('s2')">
+                            Ready? Move on to Step 2 →
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- Begin Step 2 -->
+        <div id="step2" class="main">
+            <div id="menu">
+                <a href="#step2" class="start">Step 2</a>
+                <a href="#2_1">2.1 Access the drone controller</a>
+                <a href="#2_2">2.2 Add and configure a new link endpoint</a>
+                <a href="#2_3">2.3 View the newly created link endpoint and its address</a>
+                <a href="#finishStep2" class="end">Finish Step 2</a>
+            </div>
+            <div id="content">
+                <div id="main">
+
+                    <div id="sec_step2">
+                        <h1>
+                            <a name="step2">Step 2: Enable access to an application at a location with Satellite Link Endpoints</a>
+                        </h1>
+
+                        <div class="standardImage">
+                            <img src="./img/2_overview_A.png">
+                        </div>
+
+                        <div style="text-align: center;">
+                           <i> Below, you will see a version of this that is specific to this lab's flow.</i>
+                        </div>
+                       
+                        <p>
+                            In the previous step, you learned about Satellite and became familiar with its key features. In this step, you will learn how to enable a <b>drone controller application</b> running on a <b>satellite location</b> at a client’s cloud to <b>accept requests</b> from IBM Cloud. To make this lab simple and more to the point, we have created this client’s cloud on IBM Cloud itself.
+                        </p>
+
+                        <p>
+                            The applications running on a satellite location can have access to other applications and data that are <b>private</b> to that location. To access the drone controller application from IBM Cloud, we need to create a <span class="blue">link endpoint</span>. 
+                        </p>
+
+                        <p style="text-align: center;">
+                            Before you <b>create</b> any <b>link endpoint</b>, you need to know <b>following details</b>:
+                        </p>
+
+                        <table class="bluepoints">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Is your application on the satellite location <b>invoking</b> a service on IBM Cloud? Or is a service from IBM Cloud invoking it?
+                                    </td>
+                                    <td>
+                                        What is the <b>transport protocol</b> of the requester and service provider?
+                                    </td>
+                                    <td>
+                                        What is the <b>port address</b> of the provider?
+                                    </td>
+                                    <td>
+                                        Do you need to set anything on the <b>access list</b>?
+                                    </td>
+                                    <td>
+                                        Are there any <b>security certificates</b> that need to be exchanged?
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            For this lab, you have been provisioned with a few things, as mentioned in the introduction. 
+                        </p>
+
+                        <div class="important">
+                            But to make sense of it, let’s take a look at this lab’s overall flow:
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/dronelab2-sat-visual-animated.gif">
+                        </div>
+
+                        
+                        <div class="important">
+                            <a href="./img/dronelab2-sat-visual-3.png" target="_blank">View full size diagram (<b>Emphasis</b>)</a> <br/>
+                        </div>
+
+                        <p>
+                            In Step 1, you explored <b>govlab-satellite-location</b>. Look at the diagram above and find it. <span style="color:#70AD47"><i>(Green color)</i></span>. This is a classic cluster.
+                        </p>
+
+                        <p>
+                            In this Step 2, you will create a <b>Link Endpoint</b> in the <b>govlab-satellite-location</b>. <i></i>(You saw an example of one in Step 1.6.2)</i>. 
+                        </p>
+                        
+                        <p>
+                            You will also explore the <b>govlab-satellite-satcloudcluster</b> <i>(diagram above, right side)</i> which contains your project that was provisioned for you. Within your <b>provisioned project</b>, there is a <b>drone controller application</b> that provides the drone service from IEL-Drones-To-Go. 
+                        </p>
+
+                        <p>
+                            The link endpoint you create will be connected via the <b>route URL</b> from this drone controller application in your provisioned project in the <b>govlab-satellite-satcloudcluster</b>.
+                        </p>
+                        
+
+                        <p>
+                            Remember, to invoke the <b>drone controller service</b> from the drone console application, you need to create a <b>link endpoint</b> on <b>govlab-satellite-location</b>. Think of it as a wire connecting the private cloud service and the public cloud dashboard application.
+                        </p>
+
+
+
+
+                        <div class="whole">
+                            <div class="rect blueRect">
+                                <div class="in">
+                                    Technologies Used
+                                    <br/>
+                                    <img src="./img/cloud.png" /><br/>
+                                    <img src="./img/openshift.png" /><br/>
+                                    <img src="./img/satellite_logo.png" />
+                                </div>
+                            </div>
+
+                            <div class="rect magentaRect">
+                                <div class="in">
+                                    Your Tasks for Step 2 <br/><br/>
+                                    <div class="list">
+                                        ✅ Access the drone controller <br/>
+                                        ✅ Add and configure a new link endpoint <br/>
+                                        ✅ View the newly created link endpoint and its address <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step completed">
+                                            <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                            ☑ Access IBM Cloud<br/>
+                                            ☑ Access IBM Cloud Satellite<br/>
+                                            ☑ Access Satellite Infrastructure collection<br/>
+                                            ☑ Access hosts assigned to Lab Satellite Location<br/>
+                                            ☑ Access services for a Satellite location<br/>
+                                            ☑ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step inprogress">
+                                            <div class="title">Step 2 <b>In Progress</b></div><br/>
+                                            □ Access the drone controller<br/>
+                                            □ Add and configure a new link endpoint<br/>
+                                            □ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 3</div><br/>
+                                            □ Explore the sensor database<br/>
+                                            □ Set up App Connect flow<br/>
+                                            □ Start the API<br/>
+                                            □ Try out the flow<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 4</div><br/>
+                                            □ Configure lab flow using Satellite Link endpoint<br/>
+                                            □ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <!-- 2.1 -->
+                    <div id="sec_2_1">
+                        <h2>
+                            <a name="2_1">2.1 Access the drone controller </a>
+                        </h2>
+
+                        <div class="sectionTitle">2.1.1</div>
+                        <p>
+                            In order to quickly navigate to the OpenShift cluster that the drone controller is in, let’s go back to Services.
+                        </p>
+
+                        <div class="step">
+                            Click on "<b>govlab-satellite-location – Link endpoints</b>" at the top of the page.
+                        </div><br/>
+
+                        <div class="step">
+                            Then, click on "<b>Services"</b> on the left side.
+                        </div>
+
+                        <p>
+                            <i>If you haven’t continued from Step 1, you can also navigate straight to <a href="https://cloud.ibm.com/satellite/locations/c7lkj17w0vpdf5solosg/services" target="_blank">https://cloud.ibm.com/satellite/locations/c7lkj17w0vpdf5solosg/services</a>.</i>
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/2_1_1.png">
+                        </div>
+
+                        <div class="sectionTitle">2.1.2</div>
+
+                        <p>
+                            Back in <b>Services</b> for <b>govlab-satellite-location</b>, you will see that the Red Hat OpenShift service is in the govlab-satellite-satcloudcluster cluster. Remember the animated diagram earlier – this cluster contains your provisioned project and drone controller service.
+                        </p>
+
+                        <div class="step">
+                            Click on <b>govlab-satellite-satcloudcluster</b> next to the Red Hat OpenShift service.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_1_2_A.png">
+                        </div>
+
+                        <p>
+                            Let’s open the OpenShift web console to access the projects and pods deployed.
+                        </p>
+
+                        <div class="step">
+                            Click on <b>OpenShift web console</b>. You may need to enable pop-ups for your browser.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_1_2_B.png">
+                        </div>
+
+
+                        <div class="sectionTitle">2.1.3</div>
+
+                        <p>
+                            When you open this cluster’s web console, you may see a relatively sparse page, another project’s details, or a long list of projects in this cluster. Let’s navigate to <b><i>your</i></b> provisioned project. If there is a "Welcome to the Developer Perspective" prompt, click "Skip Tour" for now.
+                        </p>
+
+                        <p>
+                            <b>Note</b>: You may see ‘sjchrist’ in screenshots – your lab name (<b><span class="labnameHere">YourLabName</span></b>) is what you should look for instead.
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <img class="rightFloat" src="./img/2_1_3_A.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <div class="step">
+                                            Make sure you are in <b>Developer</b> mode.
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="step">
+                            Click on the <b>All Projects</b> dropdown to load all the projects.  
+                        </div>
+                        
+                        <br/>
+
+                        <div class="step">
+                            Then, find and click <b><span class="labnameHere">YourLabName</span>-lab-sat</b> to drill into your project.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_1_3_B.png">
+                        </div>
+
+                        <div class="step">
+                            Within your project, if you aren’t already in the <b>Topology</b> view, select Topology from the left navigation.
+                        </div>
+
+                        <br/>
+
+                        <div class="step">
+                            <b>Click on the pod</b> <i>(circle with OpenShift logo)</i> to view the details of the deployed pod.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_1_3_C.png">
+                        </div>
+
+                        <div class="sectionTitle">2.1.4</div>
+
+                        <p>
+                            The <b>right panel</b> displays the information for the deployed pod you see: <b>controller-lab-sat</b>. If this view feels unfamiliar or you’d like to revisit what the terms on this panel mean, go back to Drone Lab 1’s Step 4.
+                        </p>
+
+                        <p>
+                            At the bottom of the right panel, you should see a grouping for <b>Routes</b>. Remember that a <a href="https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html" target="_blank">route</a> exposes a <a href="https://docs.openshift.com/container-platform/3.11/architecture/core_concepts/pods_and_services.html#services" target="_blank">service</a> at a host name, such as <i>www.example.com</i>, so that external clients can reach it by name. The route URL here will be used to make the link endpoint you will create soon.
+                        </p>
+
+                        <p class="orange">
+                            Notice that the route location URL starts with <u>https</u> – the exposed protocol is <u>HTTPS</u>, which has a default port of <u>443</u>. This will be referenced and used in a later step.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/2_1_4_A.png">
+                        </div>
+
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="30%">
+                                        <img class="rightFloat" src="./img/2_1_4_B.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <div class="step">
+                                            Copy the <b>route location URL</b> and paste it below
+                                        </div>
+
+                                        <br/>
+
+                                        <input id="routeLocationURLVal" placeholder="Paste your route location URL here" style="width:100%" />
+                                        <input id="done" type="button" value="submit" onclick="setRouteLocationURL()" />
+                
+                                        
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="confirmTextRouteLocationURL">
+                            <div class="important">Do NOT move on until you have pasted and clicked submit!</div>
+                        </div>
+
+                        <div id="afterRouteLocationURL" style="display:none">
+                            <b>You may now continue to step 2.2.</b>
+                        </div>
+
+                    </div>
+
+                    <!-- 2.2 -->
+                    <div id="sec_2_2">
+                        <h2>
+                            <a name="2_2">2.2 Add and configure a new link endpoint</a>
+                        </h2>
+
+                        <div class="sectionTitle">2.2.1</div>
+
+                        <p>
+                            Now you have collected the drone controller endpoint information, let’s create and configure the <b>link endpoint </b>so that the remote drone console application dashboard can invoke it. 
+                        </p>
+
+                        <p>
+                            Let’s start by navigating to the list of link endpoints for govlab-satellite-location which you’ve seen before.
+                        </p>
+
+                        <div class="step">
+                            Go to <a href="https://cloud.ibm.com/satellite/locations/c7lkj17w0vpdf5solosg/endpoints" target="_blank">https://cloud.ibm.com/satellite/locations/c7lkj17w0vpdf5solosg/endpoints</a> to view all of the endpoints in <b>govlab-satellite-location</b>.
+                        </div>
+
+                        <div class="step">
+                            Click the <b>Create an endpoint</b> button.
+                        </div>
+                        
+
+                        <div class="standardImage">
+                            <img src="./img/2_2_1.png">
+                        </div>
+
+
+                        <div class="sectionTitle">2.2.2</div>
+
+                        <p>
+                            The link endpoint creation process starts with asking <b>where</b> the destination resources are running. The drone controller is running at a satellite location and is the destination. Remember that the drone console application runs on IBM Cloud and will invoke it. 
+                        </p>
+
+                        <div class="step">
+                            Click on <b>Satellite location</b> and then click <b>Next</b>.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_2_2.png">
+                        </div>
+
+
+                        <div class="sectionTitle">2.2.3</div>
+
+                        <p>
+                            Next, you will be prompted to enter the <b>link endpoint’s details</b> regarding the connected resource.
+                        </p>
+
+                        <div class="step">
+                            <b>Copy</b> and <b>paste</b> the following to their corresponding fields:
+                        </div>
+
+                        <p class="notesField">
+                            Endpoint name: <b><span class="labnameHere">YourLabName</span>-drone-controller</b><br/>
+                            Destination FQDN or IP: <b><span class="routeLocationURLHere">routeLocationURLHere - please go back to step 2.1.4!</span></b><br/>
+                            Destination port: <b>443</b>
+                        </p>
+
+                        <p>
+                            The <span class="blue">destination FQDN or IP</span> is the <b>route location URL</b> you copied earlier.
+                        </p>
+
+                        <p class="orange">
+                            Make sure the destination FQDN or IP does not start with <u>https://</u> or end with a <u>forward slash /</u>.  The endpoint will not create successfully if you do have these characters.
+                        </p>
+
+                        <p>
+                            The <span class="blue">destination port</span> is a reference to the <b>exposed protocol</b> mentioned in 2.1.4. The destination port will be 443, which is the default for HTTPS.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/2_2_3.png">
+                        </div>
+
+                        <div class="step">
+                            Click <b>Next</b> once you’ve filled in the values above.
+                        </div>
+
+
+                        <div class="sectionTitle">2.2.4</div>
+
+                        <p>
+                            In the Protocol step, you will be asked about the <b>source protocol</b> and <b>server name indication</b>. The drone controller application provisioned for your lab uses HTTPS as <b>transport protocol</b> and for simplicity, no authentication certificates are implemented. In a real-world scenario, to securely transmit information, the transactions are secured by certificates and for that case, you must upload the authentication certificates to exchange information between the requestor and the provider.
+                        </p>
+
+                        <div class="step">
+                            Make sure the Source Protocol is <b>HTTPS</b> and then <b>copy</b> and <b>paste</b> the server name indication shown below:
+                        </div>
+
+                        <p class="notesField">
+                            Source Protocol: <b>HTTPS</b><br/>
+                            Server name indication: <b><span class="routeLocationURLHere">routeLocationURLHere - please go back to step 2.1.4!</span></b>
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/2_2_4.png">
+                        </div>
+
+                        <p class="orange">
+                            Make sure the <u>server name indication</u> does not start with <u>https://</u> or end with a <u>forward slash /</u>. The page will alert you and not let you move on until you remove those characters.
+                        </p>
+
+                        <div class="step">
+                            Click <b>Next</b> when you’re ready.
+                        </div>
+
+                        <div class="question">
+                            💡 What is an SNI (Server Name Indication)? <span class="readmore">[Click to Read More]</span>
+                        </div>
+                        <div class="answer">
+                            An SNI (server name indication) is like mailing a package to an apartment building instead of to a house. When mailing a package to someone's house, the street address <b><i>alone</i></b> is enough to get the package to the right person. But when a package goes to an apartment building, it needs the apartment unit number in addition to the street address; otherwise, the package might not go to the right person or might not be delivered at all.<br/><br/>
+                            Many web servers are more like apartment buildings than houses: They host several domain names, and so the IP address alone is not enough to indicate which domain a user is trying to reach. This can result in the server showing the wrong SSL certificate, which prevents or terminates an HTTPS connection – just like a package can't be delivered to an address if the correct person doesn't sign for it.
+                        </div>
+
+
+                        <div class="sectionTitle">2.2.5</div>
+
+                        <p>
+                            The last step of the link endpoint creation is optional connection settings. You can set an <b>inactivity timeout</b> for your communication. If there is no activity (for the set inactivity timeout value) between the requestor and the service provider, the communication established between the two resources will be <b>terminated</b> and the resources will be freed from memory.
+                        </p>
+
+                        <div class="step">
+                            <b>Set Inactivity timeout</b> to <b>60</b> seconds and click <b>Create Endpoint</b>.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_2_5.png">
+                        </div>
+
+                    </div>
+
+                    <!-- 2.3 -->
+                    <div id="sec_2_3">
+                        <h2>
+                            <a name="2_3">2.3 View the newly created link endpoint and its address</a>
+                        </h2>
+
+                        <div class="sectionTitle">2.3.1</div>
+
+                        <p>
+                            Upon a successful satellite endpoint creation, the satellite will create a <span class="blue">link connector</span> that will <b>listen</b> for any request from IBM Cloud and <b>send the request</b> to drone controller application running on satellite cluster on the client’s cloud.
+                        </p>
+
+                        <p>
+                            Let’s take a look the newly created link endpoint information.
+                        </p>
+
+                        <div class="step">
+                            Click on <b><span class="labnameHere">YourLabName</span>-drone-controller</b>.
+                        </div>
+
+                        <br/>
+
+                        <div class="step">
+                            If it’s difficult to find in the long list, use the <b>Search</b> at the top of the list.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_3_1.png">
+                        </div>
+
+                        <p>
+                            You can view the details of the link endpoint you just created. Notice the Destination FGQN or IP and Destination port you had just entered.
+                        </p>
+
+
+                        <div class="sectionTitle">2.3.2</div>
+
+                        <p>
+                            The <span class="blue">endpoint address</span> is available to be copied.
+                        </p>
+
+                        <div class="step">
+                            Use the <b>copy to clipboard button</b> to copy the <b>endpoint address</b> and paste it below.
+                        </div>
+
+                        <br/>
+
+                        <div class="standardImage">
+                            <img src="./img/2_3_2.png">
+                        </div>
+                        
+                        <br/>
+
+                        <input id="endpointAddressVal" placeholder="Paste your endpoint address here" style="width:100%" />
+                        <input id="doneEndpoint" type="button" value="submit" onclick="setEndpointAddress()" />
+
+                        <div id="confirmTextEndpointAddress">
+                            <div class="important">Do NOT move on until you have pasted and clicked submit!</div>
+                        </div>
+
+                        <div id="afterEndpointAddress" style="display:none">
+                            <b>Note</b>: This satellite link endpoint URL will not work if you try to access it via browser. 
+                            <p>
+                                You have <span class="magenta">now completed</span> the Satellite link endpoint creation, and it is time to test and verify the connection. To test it, we will use the Remote Drone Console Application (running a classic cluster at IBM Public Cloud) provisioned for you as part of this lab as part of <b>Step 4</b>. <br/><br/>
+                            </p>
+
+                            <b>You may now continue to finish Step 2!</b>
+                        </div>
+                        
+
+                    </div>
+
+
+
+                    <!-- Finish Step 2 -->
+                    <div id="sec_finishStep2">
+                        <h2>
+                            <a name="finishStep2">Finish Step 2</a>
+                        </h2>
+                        <div class="sectionTitle">You completed Step 2! 🎉</div>
+                        <p>
+                            You have created a Satellite link endpoint that will connect the drone controller service to the Remote Drone Console Application.
+                        </p>
+                        <div class="rect magentaRect single">
+                            <div class="in">
+                                Step 2 <b>Completed</b><br/><br/>
+                                <div class="list">
+                                    ✅ Access the drone controller <br/>
+                                    ✅ Add and configure a new link endpoint <br/>
+                                    ✅ View the newly created link endpoint and its address <br/>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            In the next step, you will use another service to demonstrate the value of invoking flows involving other services.
+                        </p>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step completed">
+                                            <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                            ☑ Access IBM Cloud<br/>
+                                            ☑ Access IBM Cloud Satellite<br/>
+                                            ☑ Access Satellite Infrastructure collection<br/>
+                                            ☑ Access hosts assigned to Lab Satellite Location<br/>
+                                            ☑ Access services for a Satellite location<br/>
+                                            ☑ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 2 <b>Completed ✅</b></div><br/>
+                                            ☑ Access the drone controller<br/>
+                                            ☑ Add and configure a new link endpoint<br/>
+                                            ☑ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step next">
+                                            <div class="title">Step 3 <b>Next</b></div><br/>
+                                            □ Explore the sensor database<br/>
+                                            □ Set up App Connect flow<br/>
+                                            □ Start the API<br/>
+                                            □ Try out the flow<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 4</div><br/>
+                                            □ Configure lab flow using Satellite Link endpoint<br/>
+                                            □ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="nextStepBar" onClick="moveTo('s3')">
+                            Ready? Move on to Step 3 →
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- Begin Step 3 -->
+        <div id="step3" class="main">
+            <div id="menu">
+                <a href="#step3" class="start">Step 3</a>
+                <a href="#3_1">3.1 Explore the sensor database</a>
+                <a href="#3_2">3.2 Set up App Connect flow</a>
+                <a href="#3_3">3.3 Start the API</a>
+                <a href="#3_4">3.4 Try out the flow</a>
+                <a href="#finishStep3" class="end">Finish Step 3</a>
+            </div>
+            <div id="content">
+                <div id="main">
+
+                    <div id="sec_step3">
+                        <h1>
+                            <a name="step3">Step 3: Connect to another service with App Connect</a>
+                        </h1>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="10%">
+                                        <img src="./img/appconnect.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <p>
+                                            In previous steps, you explored Satellite and configured link endpoints. As we consider the "IEL Drones-To-Go", you will now consider how the operators need their Remote Drone Console Application to be able to (1) <b>monitor available and nearby sensors</b> and (2) <b>retrieve the associated sensor data</b>. In this step, you will learn how IBM App Connect allows an <span class="blue">API flow</span> to quickly and easily be set up in order to find the <b>current coordinates</b> of the drone and retrieve <b>nearby sensor data</b> (from  <span class="blue">IBM Cloudant</span>) in the necessary format, and automatically update the data in their drone dashboard.
+                                        </p>
+                
+                                        <p>
+                                            <span class="blue">IBM App Connect</span> connects disparate applications very quickly, regardless of whether they are on the cloud or a private network. And significantly, there is no coding required. Using the App Connect Designer on IBM Cloud makes it easy to connect apps, even applications like Salesforce, Marketo, and SAP, so that when an event occurs in one application, or a request is made to an API, the other connected apps are updated automatically.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>
+                            Below are some common templates used on App Connect. These contain prebuilt flows which can be created for an API, so that when the request is submitted (such as through a mobile or web application), the flow performs all its actions, and then returns a response that either confirms that the actions were successful, or returns the data that was requested.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/3_overview_B.png">
+                        </div>
+
+                        <p>
+                            With every service that is added, your application becomes more powerful due to it being linked to useful resources. In this step, you will learn how to use the latitude/longitude values parsed from the drone's telemetry data in order to retrieve data from a database of sensors, thereby creating a very helpful list of sensors near the drone.
+                        </p>
+
+                        <div class="whole">
+                            <div class="rect blueRect">
+                                <div class="in">
+                                    Technologies Used
+                                    <br/>
+                                    <img src="./img/cloud.png" /><br/>
+                                    <img src="./img/openshift.png" /><br/>
+                                    <img src="./img/appconnect.png" />
+                                </div>
+                            </div>
+
+                            <div class="rect magentaRect">
+                                <div class="in">
+                                    Your Tasks for Step 3 <br/><br/>
+                                    <div class="list">
+                                        ✅ Explore the sensor database <br/>
+                                        ✅ Set up App Connect flow <br/>
+                                        ✅ Start the API <br/>
+                                        ✅ Try out the flow <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step completed">
+                                            <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                            ☑ Access IBM Cloud<br/>
+                                            ☑ Access IBM Cloud Satellite<br/>
+                                            ☑ Access Satellite Infrastructure collection<br/>
+                                            ☑ Access hosts assigned to Lab Satellite Location<br/>
+                                            ☑ Access services for a Satellite location<br/>
+                                            ☑ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 2 <b>Completed ✅</b></div><br/>
+                                            ☑ Access the drone controller<br/>
+                                            ☑ Add and configure a new link endpoint<br/>
+                                            ☑ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step inprogress">
+                                            <div class="title">Step 3 <b>In Progress</b></div><br/>
+                                            □ Explore the sensor database <br/>
+                                            □ Set up App Connect flow <br/>
+                                            □ Start the API <br/>
+                                            □ Try out the flow <br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step">
+                                            <div class="title">Step 4</div><br/>
+                                            □ Configure lab flow using Satellite Link endpoint<br/>
+                                            □ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <!-- 3.1 -->
+                    <div id="sec_3_1">
+                        <h2>
+                            <a name="3_1">3.1 Explore the sensor database</a>
+                        </h2>
+
+                        <div class="sectionTitle">3.1.1</div>
+                        <p>
+                            Before you access the App Connect service, let’s take a look at the database of sensors. In real-life situations, a Public Safety Situational Awareness Operator may want to quickly look at the nearby sensors to gauge the condition of the location they are viewing through the drone.
+                        </p>
+
+                        <div class="step">Open <a href="https://cloud.ibm.com/resources" target="_blank">https://cloud.ibm.com/resources</a> and under the <b>Services and software</b> grouping, click on <b>DroneLab_Cloudant-cd</b>.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_1_1_A.png">
+                        </div>
+
+                        <p>
+                            The sensors’ information is stored in a Cloudant database. IBM Cloudant® is a fully managed, distributed database and is provided as an offering on IBM Cloud. It has already been added to your IBM Cloud account. Once you click on the service, launch the dashboard to view the databases. You will take a look at the databased named sensordb.
+                        </p>
+
+                        <div class="step">Click <b>Launch Dashboard</b>.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_1_1_B.png">
+                        </div>
+
+                        <div class="step">Click <b>sensordb</b>.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_1_1_C.png">
+                        </div>
+
+                        <div class="step">Click <b>sensorGeo</b> to expand. <br/>Then click <b>Geospatial Indexes</b> to expand. <br/>Next, click <b>sensorGeoIndex</b> to show Cloudant’s geospatial tool to visualize the underlying data.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_1_1_D.png">
+                        </div>
+
+
+                        <div class="sectionTitle">3.1.2</div>
+
+                        <p>
+                            Once you click the sensordb database, a list of sensor information will be displayed.
+                        </p>
+
+                        <p>
+                            One of the many features Cloudant provides is IBM Cloud Geospatial, or "IBM Cloudant Geo". Cloudant Geo combines the advanced geospatial queries of a Geographic Information System (GIS) with the flexibility and adaptability of IBM Cloudant's database-as-a-service (DBaaS) capabilities. These capabilities include GeoJSON, IBM Cloudant Geo index, and more.
+                        </p>
+
+                        <p>
+                            With IBM Cloudant Geo, all of the following are possible:
+                        </p>
+
+                        <p>
+                            (1) Enable web and mobile developers to enhance their applications by using geospatial operations that go beyond simple bounding boxes<br/>
+                            (2) Integrate with existing GIS applications, so that they can scale to accommodate different data sizes, concurrent users, and multiple locations.<br/>
+                            (3) Provide a NoSQL capability for GIS applications, so that large streams of data can be acquired from devices, sensors, and satellites. This data can then be stored, processed, and syndicated across other web applications.
+                        </p>
+
+                        <p>
+                            Let’s take advantage of this feature. Sensors have locations that be filtered on – within Cloudant, you’re able to draw polygons on a map and define spatially which sensors to display in a given bounded area. Go ahead and draw a circle on the map to filter sensors.
+                        </p>
+
+
+                        <div class="step">Use the <b>Circle (dot icon) Tool</b> on the right menu bar to draw a circle around a map area of your choosing.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_1_2_A.png">
+                        </div>
+
+                        <div class="step">Once you’ve made a circle, click on the <b>{ } JSON button</b> at the top to view the sensor information in your drawn circle.</div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_1_2_B.png">
+                        </div>
+
+                        <p>
+                            The circle you drew has filtered the sensors to only return the ones that are located within the boundary. When you click the JSON view, the list of JSON data pertains to the sensor markers shown on the Map view.  While the details returned  at this point is limited to the identifier and coordinates for each individual sensor, this information could then be used to query the type and values for each sensor which is useful in later lab sub-steps.
+                        </p>
+
+                        <p>
+                            In the next sub-steps, you will use the location data you were able to return in the end of Step 2 in combination with the information located in the sensors in this database to return a list of sensors nearby.
+                        </p>
+
+                    </div>
+
+
+                    <!-- 3.2 -->
+                    <div id="sec_3_2">
+                        <h2>
+                            <a name="3_2">3.2 Set up App Connect flow</a>
+                        </h2>
+
+                        <div class="sectionTitle">3.2.1</div>
+
+                        <p>
+                            Now that you have a preview of what the sensor database and its information looks like, let’s set up the flow. Close the two tabs you just opened related to the sensor database, and open the App Connect service in your IBM Cloud Resources. Then, click Launch App Connect to begin.
+                        </p>
+
+                        <div class="step">
+                            <b>Close</b> the two recent tabs:<br/><br/>
+                            current page for Map/JSON data of the sensors<br/>
+                            the DroneLab_Cloudant-cd page<br/><br/>
+                            Then open <a href="https://cloud.ibm.com/resources" target="_blank">https://cloud.ibm.com/resources</a> and expand to the <b>Cloud Foundry services</b>. <br/>Next, click the <b>DroneLab-App Connect-68</b> service.<br/><br/>
+
+                            Click <b>Launch App Connect</b>.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_1_A.png">
+                        </div>
+
+                        <p>
+                            This is the App Connect Home. You may notice that there may been integrations that have already been created – these artifacts reflect connections that other users have made. This dashboard also provides an overview of available functions that App Connect provides.
+                        </p>
+
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_1_B.png">
+                        </div>
+
+
+                        <div class="sectionTitle">3.2.2</div>
+                        <p>
+                            Let’s start by clicking on the Dashboard icon (you may need to hover to view it) on the black left side menu. In order to add a new flow, you will import its definitions that have been provided for you (similar to Step 2). On the top right corner, click New and then Import flow.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_2_A.png">
+                        </div>
+
+
+
+                        <div class="step">Click the <b>Dashboard icon</b> on the <b>left side menu</b>.<br/>Next, click the <b>New +</b> icon in the top right corner. <br/>Then click <b>Import flow…</b></div>
+
+                        <p>
+                            Using the copy to clipboard button, copy your YAML file URL below and paste it into the pop-up’s, "or specify a file URL" field. When you click Add file, it will import the YAML file containing your lab name. Click import to complete the process.
+                        </p>
+
+                        <div class="step">Use the <b>copy to clipboard</b> below and paste your URL into the ‘or specify a file URL’ field. Then click <b>Add file</b>. Lastly, click <b>Import</b> at the bottom.</div>
+
+                        <div class="codeblock">
+                            <div class="text-wrap">
+                                Your App Connect YAML file URL<br/>
+                                <textarea class="appconnectURLHere" id="text-appconnect" readonly>https://ibm.box.com/shared/static/pqp3g8dg9he4iy8jnsa3b62ajbs3vv6y.yaml</textarea>
+                                <br/>
+                                <div id="copyToClipboard-appconnect" class="clipboardButton">Copy to clipboard</div>
+                                <div id="notif-appconnect" class="notif"></div>
+                            </div>
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_2_B.png">
+                        </div>
+
+                        <p>
+                            Once the flow has been added (this may take a few seconds), the screen will update with Define view for the flow you created. 
+                        </p>
+
+                        <p>
+                            At the top, you may see something like "Dashboard / DroneLab_SAT_Prod_3". Let's change it so it's customized for you.
+                        </p>
+
+                        <div class="step">
+                            Change the name of the flow at the top to <b>"DroneLab_SAT_<span class="labnameHere">YourLabName</span>"</b>.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_2_C.png">
+                        </div>
+
+
+                            
+                        <p>
+                            Remember these two functions – <b>retrieveSensordata</b> and <span class="blue">getNearBySensors</span>. You will focus on <span class="blue">getNearBySensors</span> for the purposes of activities in the next several steps, but you will also be exposed to <b>retrieveSensordata</b> and asked to consider it within the context of the lab’s Production Flow used by the Remote Drone Console application.
+                        </p>
+
+                        <p>
+                            Take a look at the various Properties associated with the <span class="blue">getNearBySensors</span> – droneid, lat, lon, radius, and response. You will provide a droneid, the latitude and longitude coordinates from the drone, and the radius you are interested in, and get a response. Notice that these properties are strings as well.
+                        </p>
+
+                        <p>
+                            You may have noticed that <b>retrieveSensordata</b> has fewer Properties – only droneid and response. This will be explained as you continue through this lab section.
+                        </p>
+
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_2_D.png">
+                        </div>
+
+
+
+
+                        <div class="sectionTitle">3.2.3</div>
+
+                        <p>
+                            The <span class="blue">getNearBySensors</span> API is a simple API flow to demonstrate the capability and simplicity of the App Connect cloud service. For the lab, we developed this flow to show how a web application could get access to Cloudant sensor data that is in close proximity to a given drone’s location by providing the lat/long as input.
+                        </p>
+
+                        <p>
+                            The <b>retrieveSensordata</b> may be more typical of a production API flow in that it combines several steps and includes some additional logic. Specifically, this flow is different from the simplified <span class="blue">getNearBySensors</span> API flow as it retrieves the drone’s status and telemetry data using the drone controller’s GET/status API (from API Connect), parses the response to find the drone's location (latitude/longitude) information, and then uses those locations details as input to retrieve sensor readings from the Cloudant database that are in the relevant area. This flow is used by the Remote Drone Console application as part of the lab’s Production Flow.
+                        </p>
+
+                        <p>
+                            App Connect provides a model-driven, code-free approach that lets you easily implement your API operations as integration flows. For less experienced users, App Connect guides you through making models and integration flows you can use to build robust APIs. For experienced developers, App Connect's powerful tooling lets you extend the flow through code. In either model, the tool then builds well-formed OpenAPI definitions automatically. 
+                        </p>
+
+                        <p>
+                            You can preview the flow within App Connect for <span class="blue">getNearBySensors</span> by clicking on the Operations tab on the section and then Edit flow (this may appear as "View Flow"). The flow you see is linear – Request > HTTP Invoke method > JSON Parse > Response. As you continue to finish this lab, consider how this flow could be used within the Remote Console Operations application.
+                        </p>
+
+                        <div class="step">Click on Operations in the getNearBySensors section (the second box) and then Edit flow. (This may also appear as "View Flow").</div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_3.png">
+                        </div>
+
+                        <p>
+                            You can see that a simple linear visual flow represents the step by step actions that happen within the getNearBySensors API. If you click on each step in the visual flow, you will see the details reflected underneath. For example, the output below shows the details of the <b>HTTP</b> step.
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/3_2_3_NA.png">
+                        </div>
+
+                        <div class="step">Click <span class="magenta">Done</span> to close the <b>Edit view</b>.</div>
+
+                        <div class="question">
+                            💡 Want to know more about the <b>retrieveSensordata</b> production flow? <span class="readmore">[Click to Read More]</span>
+                        </div>
+                        <div class="answer">
+                            <p>As mentioned above, the retrieveSensordata API flow is used in the lab’s Production Flow to expose an endpoint for the Remote Drone Console application to dynamically find the location on the drone and then access relevant sensor data that is nearby.</p>
+
+                            <p>
+                                The flow uses the following connectors and tools:<br/>
+                                HTTP endpoint: To invoke the GET /status REST API call of API Connect (configured to the drone controller in IEL Private Cloud)<br/>
+                                HTTP endpoint: To invoke the Cloudant’s geospatial REST API call<br/>
+                                JSON Parsers: To parse the resultant HTTP response and map it to a defined object
+                            </p>
+
+                            <p>OPTIONAL: If you want to see the full flow, you can use "Edit flow" after clicking Operations within the retrieveSensordata section. (The button may also appear as "View Flow"). </p>
+
+                            <div class="standardImage">
+                                <img src="./img/3_2_3_QA.png">
+                            </div>
+
+                            <p>Notice the slider tool above the flow, which allows you to zoom out to the see see the entire flow or zoom in to a specific area of concern. Just as with the getNearBySensors flow, you can click an of the individual steps to see the corresponding details reflected underneath the flow.</p>
+
+                            <div class="step">When you are done exploring this flow, make sure to click <b>Done</b> to close the <b>Edit</b> view.</div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- 3.3 -->
+                    <div id="sec_3_3">
+                        <h2>
+                            <a name="3_3">3.3 Start the API</a>
+                        </h2>
+                        <div class="sectionTitle">3.3.1</div>
+
+                        <p>
+                            Now that you have set up the flow in App Connect, let’s test it out – but first, you’ll need to start the API and change authentication settings.  Begin by moving to the Manage view.
+                        </p>
+
+                        <p>If you are unable to see or view the Manage tab, refresh the page. You may need to change browsers if this does not work.
+                        </p>
+
+                        <p>
+                            Once you’re in the Manage view, you’ll be able to view and change settings related to the API flow.
+                        </p>
+
+                        <p>
+                            Scroll down to the Security and Rate Limiting section. Pay attention to the section names as some are named similarly. For this lab, you will turn off "Require application via API key". This lab does not include viewing the usage of the APIs so this authentication isn’t required. It should be noted that for production level implementations, it may be appropriate to require authentication so that applications that use this API would need to authenticate using an API key and secret or API key alone.   This section would thus manage its key sharing and provide visibility into the API usage after the API is online. Make sure you scroll down and save this change once it is turned off.
+                        </p>
+
+                        <div class="step">
+                            Click on the Manage tab at the top.<br/><br/>
+
+                            Under the Security and Rate Limiting section, turn off Require application authentication via API key. Then scroll to click Save.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_3_1.png">
+                        </div>
+
+                        <p>A pop-up at the top right corner will confirm your changes are saved.</p>
+
+
+                        <div class="sectionTitle">3.3.2</div>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Once this change has been saved, click on the vertical 3 dots at the top next to "Stopped". Clicking Start API will make this flow active. By making this API active, applications will now be able to use the functions that were shown in the previous sub-step.
+                                        </p>
+
+                                        <div class="step">
+                                            Click on the 3 vertical dots next to Stopped in the top right corner. Then click Start API.
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="standardImage">
+                                            <img src="./img/3_3_2_A.png">
+                                        </div>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            In the Sharing outside of Cloud Foundry organization, you’ll notice the description: To share the API with a developer who is not a member of your Cloud Foundry organization, first create an API key and a companion API documentation link. Then send the key and the link to the developer, who can then use the corresponding page to explore the API and create an API secret (if required).</p>
+                            
+                            If the above "Require authentication via API key" was enabled, you would first need to create an API key in order to use the API Documentation link.  Because this isn’t required for this lab, all that is needed is to use the API Documentation Link (from screenshot below) for the remaining substeps.
+                            </p>
+
+                            <div class="step">
+                                Scroll to the Sharing outside of Cloud Foundry organization section and click on the API Documentation Link below (opens in a new tab).
+                            </div>
+
+                            <div class="standardImage">
+                                <img src="./img/3_3_2_B.png">
+                            </div>
+
+
+                    </div>
+
+
+                    <!-- 3.4 -->
+                    <div id="sec_3_4">
+                        <h2>
+                            <a name="3_4">3.4 Try out the flow</a>
+                        </h2>
+                        <div class="sectionTitle">3.4.1</div>
+
+                        <div class="step">
+                            Click on GET /getNearBySensors in the left side menu. Then click Try it.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_4_1_A.png">
+                        </div>
+
+                        <p>
+                            Under the Query section, notice the API input parameters lat, lon, and radius. You’ll enter the location values that you should have gotten back at the end of Step 2 from the drone #1 you specified. Enter the following values in the corresponding fields and click Send to send the request. Scroll down after to view its response.
+                        </p>
+
+                        <div class="step">
+                            Paste these values in your request:<br/><br/>
+                            lat: <b>32.9426934</b><br/>
+                            lon: <b>-96.994849</b><br/>
+                            radius: <b>500</b><br/>
+                            Then click Send.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/3_4_1_B.png">
+                        </div>
+
+                        <p>
+                            You should see a sensor reading response below that starts with a 200 OK Response. Congratulations! You were able to test the simplified <span class="blue">getNearBySensors</span> flow that you added within App Connect. If you look closely at the JSON results contained in the response, you may notice the type of sensor and current values for this particular device.
+                        </p>
+
+                        <p>
+                            Thinking about our Remote Operations Console application, you can consider how App Connect’s flow can expose a single API (via the  /retrieveSensordata Production flow) that retrieves and parses a drone's current location, and then goes on to query the sensors in that immediate geospatial area to bring the values to the user. In the next step, you will visit and review the Remote Operations Console application's updated user interface and consider how these service connections enabled the Multi-Hybrid Cloud application with powerful functionality.
+                        </p>
+
+                        <p>
+                            In the next step, you will visit and review the Remote Operations Console application's updated user interface to understand how these service connections  enable that Multi-Hybrid Cloud application with powerful functionality.
+                        </p>
+
+
+                        <div class="standardImage">
+                            <img src="./img/3_4_1_C.png">
+                        </div>
+
+                        <div class="problem question">
+                            ⚠️ My response doesn’t match the picture above / I got an error! <span class="readmore">[Click to Troubleshoot]</span>
+                        </div>
+                        <div class="answer">
+                            If you do NOT see a response similar to the one above, post a screenshot of your page in the Slack channel (link in the top right corner) along with the message, <b>"My App Connect response doesn’t match what is expected in Step 3.4.1."</b>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Finish Step 3 -->
+                    <div id="sec_finishStep3">
+                        <h2>
+                            <a name="finishStep3">Finish Step 3</a>
+                        </h2>
+                        <div class="sectionTitle">You completed Step 3! 🎉</div>
+                        <p>
+                            You successfully used App Connect to add a flow that can take drone location information and find nearby sensors in a given radius.
+                        </p>
+                        <div class="rect magentaRect single">
+                            <div class="in">
+                                Step 3 <b>Completed</b><br/><br/>
+                                <div class="list">
+                                    ✅ Explore the sensor database <br/>
+                                    ✅ Set up App Connect flow <br/>
+                                    ✅ Start the API <br/>
+                                    ✅ Try out the flow <br/>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            In the next step, you will revisit the Remote Operations Console application and take a look at the Drone Viewer which incorporates some the services you delved into in previous steps.
+                        </p>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step completed">
+                                            <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                            ☑ Access IBM Cloud<br/>
+                                            ☑ Access IBM Cloud Satellite<br/>
+                                            ☑ Access Satellite Infrastructure collection<br/>
+                                            ☑ Access hosts assigned to Lab Satellite Location<br/>
+                                            ☑ Access services for a Satellite location<br/>
+                                            ☑ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 2 <b>Completed ✅</b></div><br/>
+                                            ☑ Access the drone controller<br/>
+                                            ☑ Add and configure a new link endpoint<br/>
+                                            ☑ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 3 <b>Completed ✅</b></div><br/>
+                                            ☑ Explore the sensor database <br/>
+                                            ☑ Set up App Connect flow <br/>
+                                            ☑ Start the API <br/>
+                                            ☑ Try out the flow <br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step next">
+                                            <div class="title">Step 4 <b>Next</b></div><br/>
+                                            □ Configure lab flow using Satellite Link endpoint<br/>
+                                            □ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="nextStepBar" onClick="moveTo('s4')">
+                            Ready? Move on to Step 4 →
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- Begin Step 4 -->
+        <div id="step4" class="main">
+            <div id="menu">
+                <a href="#step4" class="start">Step 4</a>
+                <a href="#4_1">4.1 Configure lab flow using Satellite Link endpoint </a>
+                <a href="#4_2">4.2 Explore the lab flow drone viewer modal</a>
+                <a href="#finishStep4" class="end">Finish Step 4</a>
+            </div>
+            <div id="content">
+                <div id="main">
+
+                    <div id="sec_step4">
+                        <h1>
+                            <a name="step4">Step 4: Explore Remote Operations Console with new flows</a>
+                        </h1>
+
+                        <p>
+                            In Steps 1, 2, and 3, you learned about IBM Satellite Technology, Satellite Link endpoints, and the App Connect service flows that were integrated with your Remote Operations Console application. Let’s review each briefly:
+                        </p>
+
+                        <p>
+                            <span class="blue">IBM Satellite</span> creates distributed cloud regions anywhere you have infrastructure. Through this hybrid mesh you can manage each location from a common control plane. Cloud Satellite does this by attaching remote infrastructure in a remote location to your Cloud Satellite control plane. This location can then be used by IBM Cloud services as deployment targets.
+                        </p>
+
+                        <p>
+                            <span class="blue">IBM Satellite Endpoint Link</span> provides secure connection between Locations and IBM Cloud. The link provides the following:<br/>
+                            - <b><i>Control</i></b> – Allows control of traffic flow across the Link including SRE traffic.<br/>
+                            - <b><i>Transparency</i></b> – Provides traffic-level transparency across the Link and access reporting.<br/>
+                            - <b><i>Audit</i></b> – Provides service registration and policy-management of traffic-flow.<br/>
+
+                        </p>
+
+                        <p>
+                            <span class="blue">App Connect</span> is an all-in-one tool for easily connecting apps, integrating data, building APIs, and acting on events. Used to invoke flows that can retrieve nearby sensors based on location data of a drone.
+                        </p>
+
+                        <p>
+                            Your Remote Operations Console application is connected to the private cloud that hosts the fictional company IEL-Drones-To-Go service, which is hosted in the IBM Industry Engineering Lab in Coppell, TX.
+                        </p>
+
+                        <p>
+                            Let’s review the lab’s diagram once more before moving on:
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/dronelab2-sat-visual-animated.gif">
+                        </div>
+
+                        
+                        <div class="important">
+                            <a href="./img/dronelab2-sat-visual-3.png" target="_blank">View full size diagram (<b>Emphasis</b>)</a> <br/>
+                        </div>
+
+                        <p>
+                            Your Remote Operations Console application is connected to the private cloud that hosts the fictional company IEL-Drones-To-Go service, which is hosted in the IBM Industry Engineering Lab in Coppell, TX. 
+                        </p>
+
+                        <p>
+                            You may remember that in Drone Lab 1, you saw a list of drones but didn’t go much further than that. In this lab, you will finally get to view what the drone sees, view telemetry data it provides, and see its relevant geospatial information. 
+                        </p>
+
+                        <div class="orange">
+                            It is recommended that you revisit the Drone Lab #1 instructions site now
+                            if it has been a while since you’ve completed it.
+                        </div>
+
+                        <p>
+                            If you want to recall specific information regarding the Remote Operations Console, it is recommended you read the instructions for Drone Lab 1, located here:  <a href="https://pages.github.ibm.com/dallas-gsc-gov/dronelab" target="_blank">https://pages.github.ibm.com/dallas-gsc-gov/dronelab</a>.
+                        </p>
+
+                        <p>
+                            It is worth reviewing Drone Lab 1 <b>Step 5</b>, which you may recall, contains a breakdown of specific parts of the console application UI. This step contains clickable sections of the page that go into detail regarding the function of each widget. This lab will not cover this content again and will go directly to a new section of the console application UI - so if it’s been a while, it is recommended that you go over this step again.
+                        </p>
+
+
+
+                        <div class="whole">
+                            <div class="rect blueRect">
+                                <div class="in">
+                                    Technologies Used
+                                    <br/>
+                                    <img src="./img/cloud.png" /><br/>
+                                    <img src="./img/openshift.png" />
+                                </div>
+                            </div>
+
+                            <div class="rect magentaRect">
+                                <div class="in">
+                                    Your Tasks for Step 4 <br/><br/>
+                                    <div class="list">
+                                        ✅ Configure lab flow using Satellite Link endpoint <br/>
+                                        ✅ Explore the lab flow drone viewer modal <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step completed">
+                                            <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                            ☑ Access IBM Cloud<br/>
+                                            ☑ Access IBM Cloud Satellite<br/>
+                                            ☑ Access Satellite Infrastructure collection<br/>
+                                            ☑ Access hosts assigned to Lab Satellite Location<br/>
+                                            ☑ Access services for a Satellite location<br/>
+                                            ☑ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 2 <b>Completed ✅</b></div><br/>
+                                            ☑ Access the drone controller<br/>
+                                            ☑ Add and configure a new link endpoint<br/>
+                                            ☑ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 3 <b>Completed ✅</b></div><br/>
+                                            ☑ Explore the sensor database <br/>
+                                            ☑ Set up App Connect flow <br/>
+                                            ☑ Start the API <br/>
+                                            ☑ Try out the flow <br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step inprogress">
+                                            <div class="title">Step 4 <b>In Progress</b></div><br/>
+                                            □ Configure lab flow using Satellite Link endpoint<br/>
+                                            □ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <!-- 4.1 -->
+                    <div id="sec_4_1">
+                        <h2>
+                            <a name="4_1">4.1 View configurations made for this lab </a>
+                        </h2>
+
+                        <div class="sectionTitle">4.1.1</div>
+
+                        <p>
+                            Remember in the animated diagram above, there was a cluster on the left side called <b>govlab-satellite-cluster</b>. You were provisioned your own project <b>in this cluster</b> which contains all the deployments necessary for the Remote Drone Console Application. Let’s view these deployed pods.
+                        </p>
+
+                        <div class="step">
+                            To go there, go to <a href="https://cloud.ibm.com/resources" target="_blank">https://cloud.ibm.com/resources</a> and under the <b>Clusters</b> grouping, click <b>govlab-satellite-cluster</b>. Then, click <b>OpenShift web console</b> blue button.
+                        </div>
+
+                        <p>
+                            You can also go directly to <a href="https://console-openshift-console.govlab-satellite-cluster-ed9112eb83c761afd4c566b0882eaa3e-0000.us-south.containers.appdomain.cloud/" target="_blank">https://console-openshift-console.govlab-satellite-cluster-ed9112eb83c761afd4c566b0882eaa3e-0000.us-south.containers.appdomain.cloud/</a>.
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <img class="rightFloat" src="./img/2_1_3_A.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <div class="step">
+                                            Make sure you are in <b>Developer</b> mode.
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="step">
+                            If you aren’t already in your project, click on the <b>All Projects</b> dropdown and click <b><span class="labnameHere">YourLabName</span>-lab-sat</b>. 
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/2_1_3_B.png">
+                        </div>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="30%">
+                                        <img class="rightFloat" src="./img/4_1_1.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <div class="step">
+                                            Within your project, if you aren’t already in the Topology view, select <b>Topology</b> from the left navigation. 
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <div class="sectionTitle">4.1.2</div>
+
+                        <p>
+                            As part of the lab provisioning process, the necessary pods to run this lab have already been created. You can see that there are <b>4 pods</b> (one set for production flow and the other for your lab). They are:
+                        </p>
+
+                        <div class="standardImage">
+                            <img src="./img/4_1_2_A.png">
+                        </div>
+
+                        <p>
+                            <b><i>Production Flow</i></b><br/>
+                            1.	ui-prod-sat<br/>
+                            2.	http-prod-sat<br/><br/>
+                            
+                            <b><i>Lab Flow</i></b><br/>
+                            3.	ui-lab-sat<br/>
+                            4.	http-lab-sat
+                        </p>
+
+                        <p>
+                            While the Production Flow is properly set up in http-<i>prod</i>-sat, you will need to update your <b>Lab Flow</b> using <span class="blue">http-<i>lab</i>-sat</span>. Let’s take the Satellite Link endpoint address you configured as part of <b>Step 2</b> and add it to the <b>http-lab-sat</b> environment.
+                        </p>
+
+                        <div class="step">
+                            Click on the <b>http-lab-sat</b> pod to open its detail panel.
+                        </div>
+
+                        <div class="problem question">
+                            ⚠️ The four nodes above are not in the Topology view of my project! <span class="readmore">[Click to Troubleshoot]</span>
+                        </div>
+                        <div class="answer">
+                            If you do NOT see the four * nodes in your project, post a screenshot of your page in the Slack channel (link in the top right corner) along with the message, <b>"I do not see the necessary Drone Lab 2 nodes in Step 4.1.2."</b>
+                        </div>
+
+
+                        <div class="standardImage">
+                            <img src="./img/4_1_2_B.png">
+                        </div>
+
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <img class="rightFloat" src="./img/4_1_2_C.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <p>
+                                            Within the <b>detail panel</b> for <b>http-lab-sat</b>, you will see a grouping for Builds. Let’s take a look at the build configuration for your lab.
+                                        </p>
+                                        <div class="step">
+                                            Click <b>http-lab-sat</b> under <b>Builds</b> (preceded with a BC).
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="sectionTitle">4.1.3</div>
+
+                        <p>
+                            The Build Config has several settings that can be changed. Let’s go to the Environment tab in order to view the environment variables that are assigned for the application during creation. For this lab application, we have created an environment variable "BASE_URL" to set your Lab Satellite link endpoint. The BASE_URL should contain the satellite link endpoint address you made in <b>Step 2.3.2</b>.
+                        </p>
+
+                        <div class="step">
+                            1. Click on the <b>Environment</b> tab.<br/>
+                            2. For the PORT field, make sure it is <b>8080</b>. <br/>
+                            For the BASE_URL field, paste in the following value: <b>https://<span class="endpointAddressHere">endpoint-address-here [please go back to Step 2.3.2!]</span></b> <br/>
+                            <b>Make sure the BASE_URL value starts with <u>https://</u></b><br/>
+                            3. Click <b>Save</b> when you are done.<br/>
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/4_1_3.png">
+                        </div>
+
+
+                        <div class="sectionTitle">4.1.4</div>
+
+                        <p>
+                            Now that you have updated your lab flow configuration with the satellite endpoint link you previously created, it’s a good idea to rebuild. Keep in mind that you have to rebuild in order for the application to use the new environment variable value you set for BASE_URL.
+                        </p>
+
+                        <div class="step">
+                            Click on <b>Topology</b> on the left menu.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/4_1_4_A.png">
+                        </div>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <img class="rightFloat" src="./img/4_1_4_B.png">
+                                    </td>
+                                    <td style="padding: 10px">
+                                        <div class="step">
+                                            Click on the <b>http-lab-sat</b> to open its detail panel and then click <b>Start Build</b>. 
+                                        </div>
+                                        <p>
+                                            This process may take a <b>few minutes</b>. 
+                                        </p>
+                                        <div class="step">
+                                            Wait until it says the latest build is <b>complete</b>.
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+                    <!-- 4.2 -->
+                    <div id="sec_4_2">
+                        <h2>
+                            <a name="4_2">4.2 Explore the lab flow drone viewer modal</a>
+                        </h2>
+
+                        <div class="sectionTitle">4.2.1</div>
+                        <p>
+                            When the build is complete, you can then access the Lab Flow UI of the drone console application. <br/><br/>
+                            Note: The satellite endpoint link can be accessed from only a server pod running on IBM cloud i.e., web-based applications cannot directly access satellite endpoint link. For this reason, in our lab and production flow, we have created HTTP pods which route traffic from the Drone UI web-based application to the Drone controller application thru satellite endpoint link.                            
+                        </p>
+
+                        <div class="step">
+                            Click on the <b>URL</b> for <b>ui-lab-sat</b> to view your Remote Drone Console Application Dashboard that uses your recent changes.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/4_2_1.png">
+                        </div>
+
+
+                        <div class="sectionTitle">4.2.2</div>
+
+                        <p>
+                            This website should be familiar from Drone Lab 1 - if you would like to review each section of the Remote Operations Console, please revisit Step 5 of the Drone Lab 1 instructions site <a href="https://pages.github.ibm.com/dallas-gsc-gov/dronelab" target="_blank">https://pages.github.ibm.com/dallas-gsc-gov/dronelab</a>.
+
+                            When you’re ready, go to the Available Drones section. Notice that the list of drones each have a status. The drones with the Available status can be connected to. These are the drones provided by the IEL Drones-To-Go service, and thanks to the services you explored earlier, this application is able to get access to these drones. Click on Connect on either of the drones to open its drone viewer modal.
+                        </p>
+
+                        <div class="step">
+                            Click <b>Connect</b> on any drone under the Available Drones with an Available status.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/4_2_2_A.png">
+                        </div>
+
+                        <p>
+                            The drone viewer modal may take a few seconds to fully load all of its components. When it’s finished, take a look below at the various parts it has and the descriptions for each. You will focus on the Location section next.
+                        
+                        <div class="standardImage">
+                            <img src="./img/4_2_2_B.png">
+                        </div>
+
+
+                        <div class="nodesText">
+                            <p>
+                                <b>Drone Viewer Modal</b></p>
+                                
+                                <p>
+                                    <span class="tblue">Status Bar</span><br/>
+                                This bar is the top where there is a back button on the left and a close button on the right. You are able to view the drone name, its connected status, and what Operation Mode you are in. Since the drone is in flight with another pilot, you are restricted to Observation Only mode.
+                            </p>
+
+                            <p>
+                                <span class="tblue">Detail Bar </span><br/>
+                                The bar underneath the status includes the drone name, the current date, who the pilot is, and the serial number of the drone you are viewing.
+                            </p>
+
+                            <p>
+                                <span class="tblue">Drone Viewer</span><br/>The top left quadrant of this modal contains images coming from the video feed of the drone in flight.
+                            </p>
+
+                            <p>
+                                <span class="tblue">Telemetry</span><br/>The top right quadrant displays the current measurements and data from the drone in order to monitoring its situation. <br/>
+                                - <b>Total Flight Time</b>: the elapsed flight measured in seconds.<br/>
+                                - <b>Barometer</b>: pressure measured in mb.<br/>
+                                - <b>Battery</b>: drone battery percentage.<br/>
+                                - <b>Height</b>: drone height measured in cm.<br/>
+                                - <b>Temp (High/Low)</b>: highest and lowest temperature measured in Celsius degree.<br/>
+                                - <b>Speed (X/Y)</b>: speed in the X and Y axis measured in cm/s.<br/>
+                                - <b>Acceleration (X/Y)</b>: acceleration in the X and Y axis measured in cm/s.<br/>
+                                - <b>Pitch/Roll/Yaw</b>: attitude pitch, roll, and yaw measured in degree.<br/>
+                                - <b>Time of Flight Distance</b>: distance the drone went in the last second in cm.<br/>
+                                - <b>Latitude/Longitude</b>: location coordinates of the drone.<br/><br/>
+                                
+                                For more information on these values, visit <a href="https://terra-1-g.djicdn.com/2d4dce68897a46b19fc717f3576b7c6a/Tello%20%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/For%20Tello/Tello%20SDK%20Documentation%20EN_1.3_1122.pdf" target="_blank">https://terra-1-g.djicdn.com/2d4dce68897a46b19fc717f3576b7c6a/Tello%20%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/For%20Tello/Tello%20SDK%20Documentation%20EN_1.3_1122.pdf</a>.
+                            </p>
+
+                            <p>
+                                <span class="tblue">Drone Control Pad </span><br/>
+                                The bottom left quadrant has controls where you can operate the drone. Currently this isn’t operational while the drone is already in flight and you are in Observation Only mode.
+                            </p>
+
+                            <p>
+                                <span class="tblue">Location</span><br/>
+                                The bottom right quadrant is interactive – you are able to click on the layers on this map and view relevant geospatial markers that are close to the drone you are viewing.
+                            </p>
+
+                        </div>
+
+
+                        <div class="sectionTitle">4.2.3</div>
+
+                        <p>
+                            In the Location section, turn on the Sensors in the map layers. You’ll notice that there a few sensors that are near the drone itself – click on one of them to view its information. If you recall earlier in the lab, you enabled access to these drones in the IEL Drones-To-Go private cloud service with Satellite Link and all of the sensors could be filtered to show nearby ones using the flow you added in Step 3. The connections to these services can be observed as you look at this section.
+                        </p>
+
+                        <div class="step">
+                            Click Sensors in the Location section map layers. Then click on a sensor maker to view its information.
+                        </div>
+
+                        <div class="standardImage">
+                            <img src="./img/4_2_3.png">
+                        </div>
+
+                        <p style="text-align: center;">
+                            This completes all the steps for Drone Lab 2 – (Satellite) – <b>congratulations</b>! 🎉 <br/> 
+                            Feel free to take a look at the other drone’s viewer modal (DJI Tello or Mavic Mini).
+                        </p>
+
+                        <table class="section_withImage">
+                            <tbody>
+                                <tr>
+                                    <td width="80%">
+                                        <div class="step">
+                                            At any point, if you want to explore the <b>production flow</b>, or if you ran into issues and want to see a working version, you go back to the <b>Topology</b> view of <b><span class="labnameHere">YourLabName</span>-lab-sat</b> in the <b>govlab-satellite-cluster</b>. <br/>
+                                            You can access the production flow URL of the <span class="blue">ui-prod-sat</span> which is preconfigured with a production Satellite link and tested for accuracy. Click on the top right "Open URL" icon of the ui-prod-sat pod to launch the production version of the Remote Drone Console Application. 
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="standardImage">
+                                            <img src="./img/4_2_3_B.png">
+                                        </div>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>
+                            Please take a screenshot of the drone viewer modal (DJI Tello or Mavic Mini) you liked seeing more and post it in the Slack channel with your feedback on this lab. Then move onto the next section.
+                        </p>
+
+
+
+                        <div class="finalStep">
+                            <span class="yel">Post a screenshot</span><br/> of the drone viewer modal you liked more<br/>
+                            in the Slack channel <a href="https://slack.com/app_redirect?channel=C036UABE4M6" target="_blank">#iel-gov-dronelab-satellite </a><br/> (Link also in the top right of this page)</div><br/><br/>
+
+                    </div>
+
+                    <!-- Finish Step 4 -->
+                    <div id="sec_finishStep4">
+                        <h2>
+                            <a name="finishStep4">Finish Step 4</a>
+                        </h2>
+                        <div class="sectionTitle">You completed Step 4! 🎉</div>
+                        <p>
+                            You explored both the production flow of the Remote Drone Console Application and your own configured lab flow of the Application that uses the Satellite endpoint link you had previously created.
+                        </p>
+                        <div class="rect magentaRect single">
+                            <div class="in">
+                                Step 4 <b>Completed</b><br/><br/>
+                                <div class="list">
+                                    ✅ Configure lab flow using Satellite Link endpoint<br/>
+                                    ✅ Explore the lab flow drone viewer modal <br/>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <p>
+                            In the next step, you will conclude this lab.
+                        </p>
+                        <div class="timeline">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="step completed">
+                                            <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                            ☑ Access IBM Cloud<br/>
+                                            ☑ Access IBM Cloud Satellite<br/>
+                                            ☑ Access Satellite Infrastructure collection<br/>
+                                            ☑ Access hosts assigned to Lab Satellite Location<br/>
+                                            ☑ Access services for a Satellite location<br/>
+                                            ☑ Access Link Endpoints
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 2 <b>Completed ✅</b></div><br/>
+                                            ☑ Access the drone controller<br/>
+                                            ☑ Add and configure a new link endpoint<br/>
+                                            ☑ View the newly created link endpoint and its address<br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 3 <b>Completed ✅</b></div><br/>
+                                            ☑ Explore the sensor database <br/>
+                                            ☑ Set up App Connect flow <br/>
+                                            ☑ Start the API <br/>
+                                            ☑ Try out the flow <br/>
+                                        </td>
+                                        <td class="arrow">→</td>
+                                        <td class="step completed">
+                                            <div class="title">Step 4 <b>Completed ✅</b></div><br/>
+                                            ☑ Configure lab flow using Satellite Link endpoint<br/>
+                                            ☑ Explore the lab flow drone viewer modal<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="nextStepBar" onClick="moveTo('sum')">
+                            Ready? Move on to Summary →
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- Begin Summary -->
+        <div id="summary" class="main">
+            <h2>IEL Drone Lab 2 (Satellite): Summary</h2>
+            <div class="timeline">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="step completed">
+                                <div class="title">Step 1 <b>Completed ✅</b></div><br/>
+                                ☑ Access IBM Cloud<br/>
+                                ☑ Access IBM Cloud Satellite<br/>
+                                ☑ Access Satellite Infrastructure collection<br/>
+                                ☑ Access hosts assigned to Lab Satellite Location<br/>
+                                ☑ Access services for a Satellite location<br/>
+                                ☑ Access Link Endpoints
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step completed">
+                                <div class="title">Step 2 <b>Completed ✅</b></div><br/>
+                                ☑ Access the drone controller<br/>
+                                ☑ Add and configure a new link endpoint<br/>
+                                ☑ View the newly created link endpoint and its address<br/>
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step completed">
+                                <div class="title">Step 3 <b>Completed ✅</b></div><br/>
+                                ☑ Explore the sensor database <br/>
+                                ☑ Set up App Connect flow <br/>
+                                ☑ Start the API <br/>
+                                ☑ Try out the flow <br/>
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step completed">
+                                <div class="title">Step 4 <b>Completed ✅</b></div><br/>
+                                ☑ Configure lab flow using Satellite Link endpoint<br/>
+                                ☑ Explore the lab flow drone viewer modal<br/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <br/><br/>
+            <div class="block">
+                <div class="final_left">
+                    <img class="sideImage" src="./img/prodflow.png" />
+                    <br/>
+                    <a href="./img/diagram.png" target="_blank">View full size diagram</a>
+
+                </div>
+                <div class="final_right">
+                    <p><b>Let’s review what we accomplished in this lab overall:</b> </p>
+
+                    <p>
+                        First, you explored IBM Satellite and gained a strong understanding of its key features and how it works.
+                    </p>
+
+                    <p>
+                        Next, you created a Satellite endpoint link that allows the Remote Operations Console to run on the IBM Public Cloud and access the drone controller service.
+                    </p>
+
+                    <p>
+                        Then, you created a flow using App Connect to use that drone location information to get back a list of sensors that are close to the drone’s location.
+                    </p>
+
+                    <p>
+                        Lastly, you explored the Remote Operations Console application’s drone viewer modal, and got to see the different components associated with a drone that were enabled through the use of the above services.
+                    </p>
+
+                    <p>
+                        The takeaway of this lab is a better understanding of how various IBM services can be easily connected to a cloud application in order to augment its security, functionality, and connectivity.
+                    </p>
+                    
+
+                </div>
+
+                <hr />
+                <br/><br/>
+
+                <div class="centerImg">
+                    <img src="./img/dronelab2-sat-visual-1.png" style="width: 70%">
+                </div>
+
+
+
+
+            </div>
+            <div class="mid">
+                <hr />
+                Thank you for taking time to complete <b>IEL Drone Lab 2 (Satellite)</b>. <span class="blue">Did you enjoy this lab?</span> Please leave a comment in this lab’s <span class="purple"><a href="https://slack.com/app_redirect?channel=C036UABE4M6" target="_blank">Slack channel</a></span> (link in the top right) and let us know!
+                
+                <br/><br/> 
+                
+                If you found this lab to be useful, remember that this lab is the <b>second</b> a series of <b>Hands-on Labs</b>. There are more that expand on the scenario and functionality that you completed today.
+
+                <br/><br/>
+                <table class="futureLabs">
+                    <tbody>
+                        <tr class="header">
+                            <td>Lab Title</td>
+                            <td>Lab Description</td>
+                        </tr>
+                        <tr class="completed">
+                            <td width="40%">
+                                ✅ <b>Lab 1 (IBM)</b> Completed
+                            </td>
+                            <td>
+                                Building the drone application on a Multi-Hybrid cloud platform and using all the associated coding tools
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Lab 2 (Secure Gateway)</b> <i>(Optional) </i>
+                            </td>
+                            <td>
+                                Validate connectivity to resources in back-end private cloud, and test interaction with drone in remote private cloud location via app running in multi-hybrid cloud.
+                            </td>
+                        </tr>
+                        <tr class="completed">
+                            <td>
+                                ✅ <b>Lab 2 (Satellite)</b> Completed
+                            </td>
+                            <td>
+                                Validate connectivity to resources in back-end private cloud, and test interaction with drone in remote private cloud location via app running in multi-hybrid cloud.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Stormwater Lab</b>
+                            </td>
+                            <td>
+                                Apply visual recognition to detect/count vehicles and sensor API to monitor water/flooding in streams in order to reroute traffic and barricade unsafe conditions, in a specific geographic location.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mid">
+                The IEL Drone Lab 2 (Satellite) was created by the <b>IBM Industry Engineering Lab Public/Fed Market</b> team in Dallas, TX.<br/>
+                
+                For more information on the <b>Industry Engineering Lab</b>, what we do, and our pre-sales technical support for industry solutions, visit <a href="https://w3.ibm.com/w3publisher/industry-engineering-lab" target="_blank">https://w3.ibm.com/w3publisher/industry-engineering-lab.</a><br/> <br/>
+            </div>
+        </div>
+
+        <!--- End Lab-->
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
